@@ -22,7 +22,7 @@
 .banner {
     display: flex;
     position: absolute;
-    height: 15%;
+    height: 125px;
     width: 100%;
     top: 0px;
     z-index: 0;
