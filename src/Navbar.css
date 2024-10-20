@@ -10,6 +10,7 @@
 .container {
     display: flex;
     margin: auto;
+    position: -webkit-sticky;
     position: sticky;
     border-radius: 20px;
     height: 100%;
