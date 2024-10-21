@@ -1,9 +1,9 @@
-.LOGO, .signup, .signin {
+.LOGO, .signup, .signin, .signout{
     font-size: 25px;
     color: white;
     cursor: pointer;
 }
-.signup, .signin {
+.signup, .signin, .signout {
     position: absolute;
     right: 0px;
     margin-right: 35px;
