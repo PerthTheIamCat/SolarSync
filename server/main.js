@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config({ path: '.env.local' });
 const app = express();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const MONGO_URL = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.3zma22x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 const port = 3001;
 
@@ -96,13 +96,27 @@ mqttClient.on('message', (topic, message) => {
 });
 
 
-const SECRET_KEY = 'secret-key';
+const SECRET_KEY = process.env.SECRET_KEY;
 
 // Route สำหรับ login
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  const user = users.find(u => u.username === username && u.password === password);
 
+app.post('/register', (req, res) => {
+  const { email, password } = req.body;
+  const user = users.find(u => u.email === email);
+
+  if (user) {
+    res.status(400).send('this email already been used');
+  } else {
+    const newUser = { _id: new ObjectId(), email, password };
+    users.push(newUser);
+    res.json(newUser);
+  }
+});
+
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+  const user = users.find(u => u.email === email && u.password === password);
+  console.log("user: "+email+" try to login");
   if (user) {
     const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
     res.json({ token });
@@ -111,7 +125,6 @@ app.post('/login', (req, res) => {
   }
 });
 
-// Route สำหรับทดสอบ token
 app.get('/protected', (req, res) => {
   const token = req.headers['authorization'];
 
