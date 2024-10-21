@@ -38,13 +38,10 @@ var users = [];
 
 async function connect_mongodb() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
     await mongo_client.connect();
-    // Send a ping to confirm a successful connection
     await mongo_client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
-    // Ensures that the client will close when you finish/error
     await mongo_client.close();
   }
 }
@@ -61,6 +58,13 @@ async function getUser(client) {
   }
 }
 getUser(mongo_client).catch(console.dir);
+
+async function insertUser(client, newUser) {
+  await client.connect();
+  const result = await client.db("SolarSync").collection("user").insertOne(newUser);
+  console.log(`New user created with the following id: ${result.insertedId}`);
+  return result;
+}
 
 mqttClient.on('connect', () => {
   console.log('Connected to MQTT Broker');
@@ -95,10 +99,7 @@ mqttClient.on('message', (topic, message) => {
   }
 });
 
-
 const SECRET_KEY = process.env.SECRET_KEY;
-
-// Route สำหรับ login
 
 app.post('/register', (req, res) => {
   const { email, password } = req.body;
@@ -108,7 +109,9 @@ app.post('/register', (req, res) => {
     res.status(400).send('this email already been used');
   } else {
     const newUser = { _id: new ObjectId(), email, password };
+    console.log("new user: "+email+" register");
     users.push(newUser);
+    insertUser(mongo_client, newUser).catch(console.dir);
     res.json(newUser);
   }
 });
