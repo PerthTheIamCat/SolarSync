@@ -12,7 +12,7 @@ function Home() {
             <div className="HOME relative">
                 <div className="banner"></div>
                 <h1>LOGO</h1>
-                <button className="sign-up-btn" onClick={()=>navigate("/signIn")}>Sign In</button>
+                <button className="sign-in-btn" onClick={()=>navigate("/signIn")}>Sign In</button>
             </div> 
             <div className="HOME">
                 <h1>Home</h1>

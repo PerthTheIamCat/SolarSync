@@ -11,13 +11,13 @@
     position: relative;
 }
 
-.sign-up-btn {
+.sign-in-btn {
     margin-top: 20px;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     background-color: #039BE5;
-    color: black;
+    color: white;
     font-size: 20px;
     cursor: pointer;
 }
