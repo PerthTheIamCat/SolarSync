@@ -1,10 +1,11 @@
 .LOGO, .signup, .signin {
     font-size: 25px;
     color: white;
+    cursor: pointer;
 }
 .signup, .signin {
-    text-align: right;
-    width: 100%;
+    position: absolute;
+    right: 0px;
     margin-right: 35px;
 }
 

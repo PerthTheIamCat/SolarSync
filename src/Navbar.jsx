@@ -8,7 +8,7 @@ function Navbar() {
     <>
       <div className="container">
         <ul>
-          <h1 className="LOGO">LOGO</h1>
+          <h1 className="LOGO" onClick={()=>{navigate("/")}}>LOGO</h1>
           {window.location.pathname === "/signup" ? (
             <h1
               className="signup"
