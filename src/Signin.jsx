@@ -1,5 +1,5 @@
 import React from 'react';
-import "./SignIn.css";
+import "./Signin.css";
 import Navbar from './Navbar';
 
 export default function SignIn() {
@@ -24,7 +24,7 @@ export default function SignIn() {
                     </label>
                     <button id="SignIn-btn" type="submit">Sign In</button>
                     <label htmlFor="sign-up">
-                        <span>Don't have an account? <a id="sign-up" href="/">Sign Up</a></span>
+                        <span>Don't have an account? <a id="sign-up" href="/signup">Sign Up</a></span>
                     </label>
                 </form>
             </div>
