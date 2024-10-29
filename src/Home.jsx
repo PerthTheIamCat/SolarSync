@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
+import "./Sidebar.css" ;
 import "./Home.css";
 import Loading from "./Loading";
 
@@ -62,6 +64,12 @@ function Home() {
         <h1>Home</h1>
         <p>Welcome to the Home page.</p>
       </div>
+      
+      <div className="HOME ">
+          <Sidebar isTokenValid={isTokenValid} />
+              <h1>Welcome to the Dashboard</h1>
+      </div>
+
     </div>
   );
 }

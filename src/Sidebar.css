@@ -1,0 +1,62 @@
+/* จัดตำแหน่ง Sidebar */
+.sidebar {
+    position:absolute;
+    top: 140px ;
+    left: 2.5%  ;
+    width: 250px;
+    height: 75vh;
+    background-color: #01579b;
+    box-shadow: 0 0 10px 0 #01579b ;
+    border: 2px solid #01579b;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    border-radius: 20px;
+}
+
+/* โลโก้ */
+.logo img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* เมนู */
+.menu {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    justify-items: center ;
+    align-items: center;
+}
+
+.menu button {
+    width: 95%;
+    border-radius: 20px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.menu button{
+    color: #f1fdff;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    background: #0288d1;
+    transition: background 0.3s;
+    border: none;
+}
+
+.menu button:hover {
+    background-color: #039be5;
+}
+
+.menu button.active {
+    background-color: #f1fdff; /* สีฟ้าหรือสีที่ต้องการเมื่อถูกกด */
+    color: #007bff;
+}

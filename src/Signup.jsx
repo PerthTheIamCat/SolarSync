@@ -9,7 +9,14 @@ export default function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    async function sha256Hash(msg) {
+        const data = new TextEncoder().encode(msg); // แปลงเป็นไบนารี
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data); // คำนวณแฮช
+        return Array.from(new Uint8Array(hashBuffer))
+                     .map(b => b.toString(16).padStart(2, '0')).join(''); // แปลงเป็นฐาน 16
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
             console.log("password matched");
@@ -17,9 +24,10 @@ export default function SignUp() {
             console.log("password not matched");
         }
         try {
+            const hashedPassword = await sha256Hash(password);
             axios.post('http://localhost:3001/register', {
                 email: email,
-                password: password
+                password: hashedPassword
             }).then((response) => {
                 console.log(response);
             }).then(() => {
