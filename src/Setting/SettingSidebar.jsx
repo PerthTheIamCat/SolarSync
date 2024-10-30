@@ -8,7 +8,7 @@ import { TiWeatherPartlySunny } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 
     
-export default function Sett({isTokenValid}) {
+export default function SettingSidebar() {
     const [activeButton,setActiveButton] = useState("Profile") ;
     const navigate = useNavigate();
 
@@ -18,9 +18,6 @@ export default function Sett({isTokenValid}) {
     };
 
     return (
-        <div>
-            
-        {isTokenValid ? (
         <div>
             <div className="sidebar">
                 <h2>Setting</h2>
@@ -43,10 +40,7 @@ export default function Sett({isTokenValid}) {
                     className={activeButton === 'Nonti' ? 'active' : ''}
                 ><TiWeatherPartlySunny /> Weather</button>
                 </ul>
-            </div>
-        </div>) : ""}
-        
-        
+            </div> 
         </div>
     );
 }

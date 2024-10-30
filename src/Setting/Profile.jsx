@@ -4,10 +4,11 @@ import SettingSidebar from "./SettingSidebar";
 
 function Profile() {
   document.title = "Profile";
-    
+   
   return (
     <div id="profile-container">
-      <Navbar />
+      <Navbar isTokenValid={true}  />
+      <SettingSidebar  />
       <div className="Profile relative">
         <div className="banner"></div>
         <h1>LOGO</h1>
@@ -17,8 +18,7 @@ function Profile() {
         <p>Welcome to the Profile page.</p>
       </div>
       
-      <div className="Profile2">
-            <SettingSidebar />
+      <div className="Profile2">           
             <h1>Welcome to the Dashboard</h1>
       </div>
 
