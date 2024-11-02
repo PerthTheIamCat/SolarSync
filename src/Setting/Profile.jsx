@@ -52,8 +52,8 @@ function Profile(user) {
             <button className="save-button" onClick={handleSave}>Save Changes</button>
           </div>
         </div>
-        
-    </div>
+      </div>
+      
       <div className="Profile">
         <h1>Profile</h1>
         <p>Welcome to the Profile page.</p>

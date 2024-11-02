@@ -1,0 +1,85 @@
+.Noti {
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #F1FDFF;
+}
+.relative {
+    position: relative;
+}
+
+.noti-items h2{
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 100px;
+    margin-bottom: 20px;
+    color: #01579B;
+}
+
+#Noti-container {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    height: 100vh;
+    background-color: #F1FDFF;
+}
+.noti-items { 
+    height: 275px;
+    width: 500px;
+    background-color: #039BE5; /* พื้นหลังสีฟ้าเข้ม */
+    border-radius: 10px; /* ขอบมน */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* เงาเบา ๆ */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff; 
+    padding: 20px;
+    margin: auto; /* ตั้งให้อยู่ตรงกลางของหน้าจอ */
+    margin-top: 100px;
+}
+
+#span {
+    font-size: 30px ;
+}
+
+.noti-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 80%;
+  }
+  
+  .noti-item label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  .noti-item input {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  input[readonly] {
+    background-color: #f3f3f3;
+    color: #888;
+  }
+  
+  .checkbox {
+    margin-left: 150px;
+    font-size: 1.2rem;
+}
+
+.noti-item input[type="checkbox"] {
+    width: 25px; /* ขนาดความกว้างของ check mark */
+    height: 25px; /* ขนาดความสูงของ check mark */
+    accent-color: #f1fdff; /* เปลี่ยนสี */
+    cursor: pointer;
+}

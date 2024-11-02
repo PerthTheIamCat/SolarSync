@@ -31,16 +31,16 @@ export default function SettingSidebar() {
                 ><ImProfile /> Profile</button>
                     
                     <button
-                    onClick={() => handleButtonClick('/setting/solar', 'Email')}
+                    onClick={() => handleButtonClick('/setting/email', 'Email')}
                     className={activeButton === 'Email' ? 'active' : ''}
                 ><RiLockPasswordFill /> Email & Password</button>
                     
                     <button
-                    onClick={() => handleButtonClick('/setting/weather', 'Noti')}
-                    className={activeButton === 'Nonti' ? 'active' : ''}
+                    onClick={() => handleButtonClick('/setting/notification', 'Notification')}
+                    className={activeButton === 'Notification' ? 'active' : ''}
                 ><IoIosNotifications /> Nontification</button>
                 </ul>
             </div> 
         </div>
-    );
+    )
 }
