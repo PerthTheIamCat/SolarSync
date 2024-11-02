@@ -13,7 +13,7 @@ export default function SettingSidebar() {
     const navigate = useNavigate();
 
     const handleButtonClick = (path, buttonName) => {
-        setActiveButton(buttonName); // อัปเดตปุ่มที่ถูกกด
+        setActiveButton(buttonName);
         navigate(path);
     };
 
@@ -21,9 +21,6 @@ export default function SettingSidebar() {
         <div>
             <div className="Settingsidebar">
                 <h2>Setting</h2>
-                {/* <div className="logo">
-                    <img src={logo} alt="Logo" />
-                </div> */}
                 <ul className="menu">
                 <button
                     onClick={() => handleButtonClick('/setting', 'Profile')}
@@ -36,11 +33,11 @@ export default function SettingSidebar() {
                 ><RiLockPasswordFill /> Email & Password</button>
                     
                     <button
-                    onClick={() => handleButtonClick('/setting/weather', 'Noti')}
-                    className={activeButton === 'Nonti' ? 'active' : ''}
+                    onClick={() => handleButtonClick('/setting/notification', 'Notification')}
+                    className={activeButton === 'Notification' ? 'active' : ''}
                 ><IoIosNotifications /> Nontification</button>
                 </ul>
             </div> 
         </div>
-    );
+    )
 }
