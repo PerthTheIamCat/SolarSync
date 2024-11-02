@@ -14,8 +14,7 @@ function Navbar({ isTokenValid }) {
     <>
       <div id="side-bar" className={isProfileOpen ? "open" : ""} >
         <div id="use-zone">
-          <h2>Profile</h2>
-          <h2>Settings</h2>
+          <h2 onClick={()=>{ navigate("/setting")}}>Settings</h2>
           <h2 onClick={()=>{ window.localStorage.removeItem("token"); navigate("/signin"); }}>Log Out</h2>
         </div>
       </div>

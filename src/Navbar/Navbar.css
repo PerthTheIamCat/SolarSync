@@ -83,3 +83,7 @@ ul {
     height: 100%;
     margin-top: 100px;
 }
+
+#use-zone > h2 {
+    cursor: pointer;
+}

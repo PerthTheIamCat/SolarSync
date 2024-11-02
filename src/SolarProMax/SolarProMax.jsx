@@ -5,6 +5,7 @@ import Sidebar from '../Sidebar/Sidebar.jsx';
 import DataBar from './dataBar.jsx';
 
 export default function SolarProMax() {
+    document.title = 'SolarProMax';
     return (
         <>
         <Navbar isTokenValid={true} />

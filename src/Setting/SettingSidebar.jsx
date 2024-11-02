@@ -5,17 +5,12 @@ import { IoIosNotifications } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
 //import logo from './logo.png'; // สมมติว่าโลโก้อยู่ในไฟล์นี้
 // import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
     
 export default function SettingSidebar() {
-    const [activeButton,setActiveButton] = useState("Profile") ;
     const navigate = useNavigate();
-
-    const handleButtonClick = (path, buttonName) => {
-        setActiveButton(buttonName);
-        navigate(path);
-    };
+    const location = useLocation();
 
     return (
         <div>
@@ -23,18 +18,18 @@ export default function SettingSidebar() {
                 <h2>Setting</h2>
                 <ul className="menu">
                 <button
-                    onClick={() => handleButtonClick('/setting', 'Profile')}
-                    className={activeButton === 'Profile' ? 'active' : ''}
+                    onClick={() => navigate('/setting')}
+                    className={location.pathname === '/setting' ? 'active' : ''}
                 ><ImProfile /> Profile</button>
                     
                     <button
-                    onClick={() => handleButtonClick('/setting/E-mail&Password', 'Email')}
-                    className={activeButton === 'Email' ? 'active' : ''}
+                    onClick={() => navigate('/setting/E-mail&Password')}
+                    className={location.pathname === '/setting/E-mail&Password' ? 'active' : ''}
                 ><RiLockPasswordFill /> Email & Password</button>
                     
                     <button
-                    onClick={() => handleButtonClick('/setting/notification', 'Notification')}
-                    className={activeButton === 'Notification' ? 'active' : ''}
+                    onClick={() => navigate('/setting/notification')}
+                    className={location.pathname === '/setting/notification' ? 'active' : ''}
                 ><IoIosNotifications /> Nontification</button>
                 </ul>
             </div> 
