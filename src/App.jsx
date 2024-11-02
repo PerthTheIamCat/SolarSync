@@ -4,7 +4,7 @@ import SignIn from "./SignIn/Signin.jsx";
 import SignUp from "./SignUp/Signup.jsx";
 import Profile from "./Setting/Profile.jsx";
 import Noti from "./Setting/Noti.jsx";
-
+import Solar from "./SolarProMax/SolarProMax.jsx";
 export default function App() {
   return (
     <BrowserRouter>
@@ -14,6 +14,7 @@ export default function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="setting/" element={<Profile />} />
         <Route path="setting/notification" element={<Noti />} />
+        <Route path="solar" element={<Solar />} />
       </Routes>
     </BrowserRouter>
   );

@@ -3,17 +3,12 @@ import './Sidebar.css';
 import { FaSolarPanel } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { TiWeatherPartlySunny } from "react-icons/ti";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
     
 export default function Sidebar({isTokenValid}) {
-    const [activeButton,setActiveButton] = useState("home") ;
     const navigate = useNavigate();
-
-    const handleButtonClick = (path, buttonName) => {
-        setActiveButton(buttonName);
-        navigate(path);
-    };
+    const location = useLocation();
 
     return (
         <div>
@@ -22,23 +17,20 @@ export default function Sidebar({isTokenValid}) {
         <div>
             <div className="sidebar">
                 <h2>LOGO</h2>
-                {/* <div className="logo">
-                    <img src={logo} alt="Logo" />
-                </div> */}
                 <ul className="menu">
                 <button
-                    onClick={() => handleButtonClick('/', 'home')}
-                    className={activeButton === 'home' ? 'active' : ''}
+                    onClick={() => navigate('/')}
+                    className={location.pathname === '/' ? 'active' : ''}
                 ><FaHome /> Home</button>
                     
                     <button
-                    onClick={() => handleButtonClick('/solar', 'solar')}
-                    className={activeButton === 'solar' ? 'active' : ''}
+                    onClick={() => navigate('/solar')}
+                    className={location.pathname === '/solar' ? 'active' : ''}
                 ><FaSolarPanel /> Solar Pro Max 360</button>
                     
                     <button
-                    onClick={() => handleButtonClick('/weather', 'weather')}
-                    className={activeButton === 'weather' ? 'active' : ''}
+                    onClick={() => navigate('/weather')}
+                    className={location.pathname === '/weather' ? 'active' : ''}
                 ><TiWeatherPartlySunny /> Weather</button>
                 </ul>
             </div>

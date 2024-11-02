@@ -9,7 +9,11 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const MONGO_URL = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.3zma22x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 const port = 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(bodyParser.json());
 
 const brokerUrl = 'mqtt://20.205.129.163'; // IP ของ VM Azure

@@ -1,0 +1,70 @@
+.dataSidebar {
+    background-color: #01579b;
+    position:  absolute;
+    right: 2.5%;
+    width: 250px;
+    height: 75vh;
+    border-radius: 20px;
+    padding-top: 20px;
+    top: 140px ;
+    box-shadow: 0 0 10px 0 #01579b ;
+}
+
+#title {
+    font-size: 25px;
+    color: white;
+    text-align: center;
+}
+
+.datalist {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    justify-items: center ;
+    align-items: center;
+    transition: all;
+}
+
+.datalist > p {
+    color: #f1fdff;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    background: #0288d1;
+    width: 70%;
+    border-radius: 20px;
+    margin: 10px 0;
+    text-align: left;
+}
+
+#battery {
+    width: 100px;
+    height: 25px;
+    background-color: white;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+
+#current-bat {
+    height: 25px;
+    background-color: green;
+    border-radius: 10px;
+}
+
+#battery-bar {
+    display: flex;
+}
+
+#battery-bar > label {
+    display: flex;
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+}
+label {
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+}
