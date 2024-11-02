@@ -1,6 +1,6 @@
 import { React , useState } from 'react';
 import "./Signin.css";
-import Navbar from './Navbar';
+import Navbar from '../Navbar/Navbar';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,12 +9,20 @@ export default function SignIn() {
     const [password, setPassword] = useState();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    async function sha256Hash(msg) {
+        const data = new TextEncoder().encode(msg); 
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data); 
+        return Array.from(new Uint8Array(hashBuffer))
+                     .map(b => b.toString(16).padStart(2, '0')).join(''); 
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            const hashedPassword = await sha256Hash(password);
             axios.post('http://localhost:3001/login', {
                 email: email,
-                password: password
+                password: hashedPassword
             }).then((response) => {
                 console.log(response);
                 localStorage.setItem('token', response.data.token);
