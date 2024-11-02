@@ -1,8 +1,8 @@
 import { React, useState } from 'react';
 import './SettingSidebar.css';
-import { FaSolarPanel } from "react-icons/fa";
-import { FaHome } from "react-icons/fa";
-import { TiWeatherPartlySunny } from "react-icons/ti";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { IoIosNotifications } from "react-icons/io";
+import { ImProfile } from "react-icons/im";
 //import logo from './logo.png'; // สมมติว่าโลโก้อยู่ในไฟล์นี้
 // import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +19,7 @@ export default function SettingSidebar() {
 
     return (
         <div>
-            <div className="sidebar">
+            <div className="Settingsidebar">
                 <h2>Setting</h2>
                 {/* <div className="logo">
                     <img src={logo} alt="Logo" />
@@ -28,17 +28,17 @@ export default function SettingSidebar() {
                 <button
                     onClick={() => handleButtonClick('/setting', 'Profile')}
                     className={activeButton === 'Profile' ? 'active' : ''}
-                ><FaHome /> Home</button>
+                ><ImProfile /> Profile</button>
                     
                     <button
                     onClick={() => handleButtonClick('/setting/solar', 'Email')}
                     className={activeButton === 'Email' ? 'active' : ''}
-                ><FaSolarPanel /> Solar Pro Max 360</button>
+                ><RiLockPasswordFill /> Email & Password</button>
                     
                     <button
-                    onClick={() => handleButtonClick('/setting/weather', 'Nonti')}
+                    onClick={() => handleButtonClick('/setting/weather', 'Noti')}
                     className={activeButton === 'Nonti' ? 'active' : ''}
-                ><TiWeatherPartlySunny /> Weather</button>
+                ><IoIosNotifications /> Nontification</button>
                 </ul>
             </div> 
         </div>
