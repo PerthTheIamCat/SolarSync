@@ -7,7 +7,7 @@ export default function DataBar() {
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
-        const response = await axios.get("http://localhost:3001/data");
+        const response = await axios.get("http://localhost:3001/data/solarsync");
         setData(response.data);
         console.log(response.data);
       } catch (error) {
