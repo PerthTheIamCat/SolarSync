@@ -4,21 +4,15 @@ import { useNavigate } from "react-router-dom";
 import Signin from "../SignIn/Signin";
 import SignUp from "../SignUp/Signup";
 
-function Navbar({onOpenSignUp:(), isTokenValid}) {
+function Navbar({ onOpenSignUp, isTokenValid }) {
  
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
   
-  const OpenSignUp = () => {
-    console.log("Open SignUp");
-    onOpenSignUp("");
-  };
   const openProfile = () => {
     console.log("Open Profile");
     setIsProfileOpen(!isProfileOpen);
   };
-
-  
 
   return (
     <>
@@ -43,9 +37,11 @@ function Navbar({onOpenSignUp:(), isTokenValid}) {
               </div>
             </div>
           ) : window.location.pathname === "/signup" ? (
-            <h1 className="signin"></h1>
+            <h1 className="signin">
+              Sign In
+            </h1>
           ) : (
-            <h1 className="signin" onClick={()=> onOpenSignUp()}>
+            <h1 className="signin" onClick={onOpenSignUp}>
               Sign Up
             </h1>
           )}

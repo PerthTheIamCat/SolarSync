@@ -16,10 +16,9 @@ function Home(props) {
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
 
-  <Navbar 
-    isTokenValid={isTokenValid} 
-    onOpenSignUp={() =>{setIsOpenSignUp(true),console.log("Open SignUp")}}
-  />
+  const onOpenSignUp = () => {
+    setIsOpenSignUp(true);
+  };
 
   useEffect(() => {
     const checkToken = async () => {
@@ -59,7 +58,7 @@ function Home(props) {
 
   return (
     <div id="home-container">
-      <Navbar isTokenValid={isTokenValid} />
+      <Navbar isTokenValid={isTokenValid} onOpenSignUp={onOpenSignUp} />
       <div className="HOME relative">
         <div className="banner"></div>
         <h1>LOGO</h1>
