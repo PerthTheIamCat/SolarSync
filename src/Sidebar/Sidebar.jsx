@@ -12,7 +12,6 @@ export default function Sidebar({isTokenValid}) {
 
     return (
         <div>
-            
         {isTokenValid ? (
         <div>
             <div className="sidebar">

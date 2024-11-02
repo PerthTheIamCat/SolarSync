@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import './SettingSidebar.css';
 import { RiLockPasswordFill } from "react-icons/ri";
 import { IoIosNotifications } from "react-icons/io";

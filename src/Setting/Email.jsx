@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import SettingSidebar from "./SettingSidebar";
+import axios from "axios";
 
 import "./Email.css";
 
@@ -13,8 +14,17 @@ function Email(user) {
   const [showModal, setShowModal] = useState(false); // สำหรับควบคุมการแสดงผลของ modal
   const [otp, setOtp] = useState(Array(6).fill("")); // เก็บค่า OTP แยกเป็น 6 ช่อง
 
-  const handleSentOTP = (e) => {
+  const handleSentOTP = async (e) => {
     e.preventDefault();
+    await axios.post("http://localhost:3001/sendotp", {
+      headers: {
+        Authorization: `${localStorage.getItem("token")}`,
+      },
+    }).then((response) => {
+      console.log(response);
+    }).catch((error) => {
+      console.error(error);
+    });
     setShowModal(true);
   };
 

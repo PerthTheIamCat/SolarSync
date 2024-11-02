@@ -203,32 +203,32 @@ app.put('/user', (req, res) => {
   });
 });
 
-app.post('/sentopt',async (req, res) => {
+app.post('/sendotp', async (req, res) => {
   const token = req.headers['authorization'];
-  let otp = '';
-  const characters = '0123456789';
-  for (let i = 0; i < 6; i++) {
-      otp += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  await mongo_client.connect();
   jwt.verify(token, SECRET_KEY, async (err, decoded) => {
     if (err) return res.status(403).send('Invalid token');
     const user = users.find(u => u._id.equals(new ObjectId(decoded.userId)));
+    let otp = '';
+    const characters = '0123456789';
+    for (let i = 0; i < 6; i++) {
+        otp += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    await mongo_client.connect();
     await mongo_client.db("SolarSync").collection("OTP").insertOne({_id: user.email, otp: otp });
   });
   
-  const sendEmail = () => {
-    emailjs
-      .send("service_btq6qg9", "template_70xeicx", {OTP : otp, reply_to : "thongkum2546@gmail.com"}, "Ff_Au8ZHm82n1G0Y9")
-      .then((result) => {
-        console.log(result.text);
-        alert("Email sent successfully!");
-      })
-      .catch((error) => {
-        console.error(error.text);
-        alert("Failed to send email.");
-      });
-  };
+  // const sendEmail = () => {
+  //   emailjs
+  //     .send("service_btq6qg9", "template_70xeicx", {OTP : otp, reply_to : "thongkum2546@gmail.com"}, "Ff_Au8ZHm82n1G0Y9")
+  //     .then((result) => {
+  //       console.log(result.text);
+  //       alert("Email sent successfully!");
+  //     })
+  //     .catch((error) => {
+  //       console.error(error.text);
+  //       alert("Failed to send email.");
+  //     });
+  // };
   
 });
 

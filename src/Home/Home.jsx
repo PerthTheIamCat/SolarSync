@@ -50,6 +50,7 @@ function Home() {
   return (
     <div id="home-container">
       <Navbar isTokenValid={isTokenValid}/>
+      <Sidebar isTokenValid={isTokenValid} />
       <div className="HOME relative">
         <div className="banner"></div>
         <h1>LOGO</h1>
@@ -65,7 +66,7 @@ function Home() {
       </div>
       
       <div className="HOME ">
-          <Sidebar isTokenValid={isTokenValid} />
+          
               <h1>Welcome to the Dashboard</h1>
       </div>
 
