@@ -1,6 +1,7 @@
 .bg-sign-up {
-    background-color: #F1FDFF;
-    height: 90vh;
+    background-color: #0000007c;
+    height: 100vh;
+    width: 100vw; /* Changed to cover full width */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,6 +45,12 @@
     border: none;
 }
 
+#container-sign-up input:focus {
+    outline: none;
+    border: 2px solid #039BE5; /* Highlight color */
+    box-shadow: 0 0 5px rgba(3, 155, 229, 0.5);
+}
+
 #container-sign-up button {
     width: 100%;
     max-width: 250px;
@@ -55,6 +62,7 @@
     color: white;
     font-size: 1.2em;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
 #container-sign-up button:hover {
@@ -71,11 +79,17 @@
     text-decoration: underline;
 }
 
+.error-message {
+    color: #ff1744; /* Error color */
+    font-size: 1em;
+    margin-top: 10px;
+}
+
 @media (max-width: 600px) {
     #container-sign-up {
         width: 80%;
     }
-    #container-sign-up input{
+    #container-sign-up input {
         width: 200px;
     }
 }
