@@ -11,7 +11,7 @@ const port = 3001;
 
 app.use(cors({
   origin: '*',
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'PUT'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(bodyParser.json());
@@ -112,7 +112,7 @@ app.post('/register', (req, res) => {
   if (user) {
     res.status(400).send('this email already been used');
   } else {
-    const newUser = { _id: new ObjectId(), email, password };
+    const newUser = { _id: new ObjectId(), email:email, password:password, img:"", username:"", birthday:"" };
     console.log("new user: "+email+" register");
     users.push(newUser);
     insertUser(mongo_client, newUser).catch(console.dir);
@@ -125,21 +125,40 @@ app.post('/login', (req, res) => {
   const user = users.find(u => u.email === email && u.password === password);
   console.log("user: "+email+" try to login");
   if (user) {
-    const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id}, SECRET_KEY, { expiresIn: '1h' });
     res.json({ token });
   } else {
     res.status(401).send('Invalid credentials');
   }
 });
 
-app.get('/protected', (req, res) => {
+app.get('/user', (req, res) => {
   const token = req.headers['authorization'];
-
+  console.log("user try to get data");
   if (!token) return res.status(403).send('Token is required');
-
-  jwt.verify(token, SECRET_KEY, (err, decoded) => {
+  jwt.verify(token, SECRET_KEY, async (err, decoded) => {
     if (err) return res.status(403).send('Invalid token');
-    res.json({ message: 'Protected content', userId: decoded.userId });
+    console.log(decoded);
+    console.log("user: "+decoded.userId+" get data");
+    const user = users.find(u => u._id.equals(new ObjectId(decoded.userId)));
+    console.log(user);
+    res.json({ email: user.email, username: user.username, birthday: user.birthday, img: user.img});
+  });
+});
+
+app.put('/user', (req, res) => {
+  const token = req.headers['authorization'];
+  const { username, birthday, img } = req.body;
+  console.log("user try update data");
+  if (!token) return res.status(403).send('Token is required');
+  jwt.verify(token, SECRET_KEY, async (err, decoded) => {
+    if (err) return res.status(403).send('Invalid token');
+    console.log(decoded);
+    console.log("user: "+decoded.userId+" get data");
+    await mongo_client.connect();
+    const result = await mongo_client.db("SolarSync").collection("user").updateOne({ _id: new ObjectId(decoded.userId) }, { $set: { username: username, birthday: birthday, img: img } });
+    getUser(mongo_client).catch(console.dir);
+    res.json(result);
   });
 });
 
