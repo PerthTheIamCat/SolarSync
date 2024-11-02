@@ -58,13 +58,12 @@ export default function Weather() {
 
     return (
         <>
-            <Navbar isTokenValid={true} />
-            <div className="banner"></div>
-            <Sidebar isTokenValid={true} /> 
-            <div className='bg'>
+            <Sidebar isTokenValid={true} />
+            <div className='bg relative'>
+                <Navbar isTokenValid={true} />
+                <div className="banner"></div>
                 <div className='content'>
                     <h1 id='weather-title'>Weather Dashboard</h1>
-
                     <div className='charts'>
                         <div className='chart'>
                             <h2>Temperature</h2>
