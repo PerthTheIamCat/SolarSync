@@ -1,0 +1,163 @@
+.Email {
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #F1FDFF;
+}
+.relative {
+  position: relative;
+}
+
+.sign-in-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #039BE5;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 100px;
+  margin-bottom: 20px;
+  color: #01579B;
+}
+
+#container {
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  height: 100vh;
+  background-color: #F1FDFF;
+}
+.email-items { 
+  height: 375px;
+  width: 500px;
+  background-color: #039BE5; /* พื้นหลังสีฟ้าเข้ม */
+  border-radius: 10px; /* ขอบมน */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* เงาเบา ๆ */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff; /* ข้อความสีขาว */
+  padding: 20px;
+  margin: auto; /* ตั้งให้อยู่ตรงกลางของหน้าจอ */
+  margin-top: 100px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.item label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.item input {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[readonly] {
+  background-color: #f3f3f3;
+  color: #888;
+}
+
+.save-button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.save-button:hover {
+  background-color: #45a049;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it is above other elements */
+}
+
+.modal-content {
+  background: #F1FDFF; /* Changed background color */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center text */
+  color: #01579B; /* Text color */
+}
+
+
+
+.otp-inputs {
+  display: flex;
+  justify-content: center; /* Center the inputs */
+  align-items: center /* Center the inputs */;
+  margin-bottom: 15px; /* Add space below the inputs */
+  
+}
+
+.otp-inputs input {
+  width: 40px; /* Width of each input field */
+  height: 40px; /* Height of each input field */
+  text-align: center; /* Center the text */
+  margin: 0 5px; /* Space between inputs */
+  font-size: 18px; /* Font size */
+  
+}
+
+button {
+  padding: 10px 20px;
+  border: none; /* No border */
+  border-radius: 5px;
+  background-color: #039BE5; /* Background color */
+  color: white; /* Text color */
+  font-size: 20px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+}
+
+button:hover {
+  background-color: #0288D1; /* Slightly darker blue on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+button:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 4px rgba(0, 57, 94, 0.5); /* Custom focus outline */
+}
+
+button:active {
+  background-color: #0277BD; /* Darker blue when pressed */
+  transform: scale(0.95); /* Slightly scale down */
+}
+
+.Sm1 {
+  margin-right: 20px; /* เพิ่มระยะห่างมากขึ้นระหว่างปุ่ม */
+}
+
+
