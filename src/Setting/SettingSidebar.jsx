@@ -3,8 +3,6 @@ import './SettingSidebar.css';
 import { FaSolarPanel } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { TiWeatherPartlySunny } from "react-icons/ti";
-//import logo from './logo.png'; // สมมติว่าโลโก้อยู่ในไฟล์นี้
-// import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
     
@@ -13,7 +11,7 @@ export default function SettingSidebar() {
     const navigate = useNavigate();
 
     const handleButtonClick = (path, buttonName) => {
-        setActiveButton(buttonName); // อัปเดตปุ่มที่ถูกกด
+        setActiveButton(buttonName);
         navigate(path);
     };
 
@@ -21,9 +19,6 @@ export default function SettingSidebar() {
         <div>
             <div className="sidebar">
                 <h2>Setting</h2>
-                {/* <div className="logo">
-                    <img src={logo} alt="Logo" />
-                </div> */}
                 <ul className="menu">
                 <button
                     onClick={() => handleButtonClick('/setting', 'Profile')}
@@ -31,13 +26,13 @@ export default function SettingSidebar() {
                 ><FaHome /> Home</button>
                     
                     <button
-                    onClick={() => handleButtonClick('/setting/solar', 'Email')}
-                    className={activeButton === 'Email' ? 'active' : ''}
+                    onClick={() => handleButtonClick('/solar-pro-max-360', 'Solar')}
+                    className={activeButton === 'Solar' ? 'active' : ''}
                 ><FaSolarPanel /> Solar Pro Max 360</button>
                     
                     <button
                     onClick={() => handleButtonClick('/setting/weather', 'Nonti')}
-                    className={activeButton === 'Nonti' ? 'active' : ''}
+                    className={activeButton === 'Weather' ? 'active' : ''}
                 ><TiWeatherPartlySunny /> Weather</button>
                 </ul>
             </div> 
