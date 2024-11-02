@@ -1,0 +1,44 @@
+.Weather {
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #F1FDFF;
+}
+.bg {
+    overflow-y: scroll;
+    max-height: 100vh;
+    display: flex;
+    height: 100vh;
+    background-color: #E0F7FA;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#weather-title {
+    font-size: 28px;
+    color: #01579B;
+    margin-bottom: 20px;
+}
+
+.charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.chart {
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
