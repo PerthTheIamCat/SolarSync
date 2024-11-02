@@ -31,7 +31,7 @@ export default function SettingSidebar() {
                 ><ImProfile /> Profile</button>
                     
                     <button
-                    onClick={() => handleButtonClick('/setting/solar', 'Email')}
+                    onClick={() => handleButtonClick('/setting/E-mail&Password', 'Email')}
                     className={activeButton === 'Email' ? 'active' : ''}
                 ><RiLockPasswordFill /> Email & Password</button>
                     
