@@ -16,9 +16,11 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 
-const brokerUrl = 'mqtt://20.205.129.163'; // IP ของ VM Azure
+const brokerUrl = 'mqtt://20.205.129.163';
+const brokerUrl2 = 'mqtt://20.205.137.214';
 const mqttClient = mqtt.connect(brokerUrl);
-
+const mqttClient2 = mqtt.connect(brokerUrl2);
+// SolarSync
 var LDR_TOP = 0;
 var LDR_BOT = 0;
 var LDR_RIG = 0;
@@ -30,6 +32,15 @@ var watt = 0;
 var battery_percentage = 0;
 var battery_voltage = 0;
 
+// Weather
+var temperature = 0;
+var humidity = 0;
+var pressure = 0;
+var heat_index = 0;
+var dew_point = 0;
+var rain_rate = 0;
+var altitude = 0;
+
 const mongo_client = new MongoClient(MONGO_URL, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -37,6 +48,7 @@ const mongo_client = new MongoClient(MONGO_URL, {
     deprecationErrors: true,
   }
 });
+
 
 var users = [];
 
@@ -103,6 +115,34 @@ mqttClient.on('message', (topic, message) => {
   }
 });
 
+mqttClient2.on('message', (topic, message) => {
+  if (topic === '/WeatherReport') {
+    try {
+      const Obj = JSON.parse(message.toString());
+      temperature = Obj.Temperature || 0;
+      humidity = Obj.DHT22.humidity || 0;
+      pressure = Obj.BMP280.Pressure || 0;
+      heat_index = Obj.HeatIndex || 0;
+      dew_point = Obj.DewPoint || 0;
+      rain_rate = Obj.RainProbability || 0;
+      altitude = Obj.BMP280.Altitude || 0;
+
+      console.log('Weather report:', Obj);
+    } catch (error) {
+      console.log('Error parsing JSON:', error);
+    }
+  }
+});
+
+mqttClient2.on('connect', () => {
+  console.log('Connected to MQTT Broker');
+  mqttClient2.subscribe('/WeatherReport', (err) => {
+    if (!err) {
+      console.log('Subscribed to topic /WeatherReport');
+    }
+  });
+});
+
 const SECRET_KEY = process.env.SECRET_KEY;
 
 app.post('/register', (req, res) => {
@@ -166,7 +206,7 @@ app.get('/', (req, res) => {
   res.send('Hello, Express!');
 });
 
-app.get('/data', (req, res) => {
+app.get('/data/solarsync', (req, res) => {
   res.json({
     LDR_TOP: LDR_TOP,
     LDR_BOT: LDR_BOT,
@@ -178,6 +218,18 @@ app.get('/data', (req, res) => {
     watt: watt,
     battery_percentage: battery_percentage,
     battery_voltage: battery_voltage
+  });
+});
+
+app.get('/data/weather', (req, res) => {
+  res.json({
+    Temperature: temperature,
+    Humidity: humidity,
+    Pressure: pressure,
+    HeatIndex: heat_index,
+    DewPoint: dew_point,
+    RainRate: rain_rate,
+    Altitude: altitude
   });
 });
 
