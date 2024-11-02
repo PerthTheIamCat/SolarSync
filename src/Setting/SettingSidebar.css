@@ -1,4 +1,5 @@
-.sidebar {
+/* จัดตำแหน่ง Sidebar */
+.Settingsidebar {
     position:absolute;
     top: 140px ;
     left: 2.5%  ;

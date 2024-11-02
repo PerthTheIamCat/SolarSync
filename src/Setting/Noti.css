@@ -1,4 +1,4 @@
-.Profile {
+.Noti {
     display: flex;
     flex-direction: column;
     scroll-snap-align: center;
@@ -11,15 +11,8 @@
     position: relative;
 }
 
-.sign-in-btn {
+.noti-items h2{
     margin-top: 20px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #039BE5;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
 }
 
 h1 {
@@ -28,15 +21,15 @@ h1 {
     color: #01579B;
 }
 
-#Profile-container {
+#Noti-container {
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     height: 100vh;
     background-color: #F1FDFF;
 }
-.profile-items { 
-    height: 375px;
+.noti-items { 
+    height: 275px;
     width: 500px;
     background-color: #039BE5; /* พื้นหลังสีฟ้าเข้ม */
     border-radius: 10px; /* ขอบมน */
@@ -45,25 +38,29 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #ffffff; /* ข้อความสีขาว */
+    color: #ffffff; 
     padding: 20px;
     margin: auto; /* ตั้งให้อยู่ตรงกลางของหน้าจอ */
     margin-top: 100px;
 }
 
-.profile-item {
+#span {
+    font-size: 30px ;
+}
+
+.noti-item {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
     width: 80%;
   }
   
-  .profile-item label {
+  .noti-item label {
     font-size: 1rem;
     margin-bottom: 5px;
   }
   
-  .profile-item input {
+  .noti-item input {
     padding: 8px;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -75,16 +72,14 @@ h1 {
     color: #888;
   }
   
-  .save-button {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
+  .checkbox {
+    margin-left: 150px;
+    font-size: 1.2rem;
+}
+
+.noti-item input[type="checkbox"] {
+    width: 25px; /* ขนาดความกว้างของ check mark */
+    height: 25px; /* ขนาดความสูงของ check mark */
+    accent-color: #f1fdff; /* เปลี่ยนสี */
     cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  .save-button:hover {
-    background-color: #45a049;
-  }
+}
