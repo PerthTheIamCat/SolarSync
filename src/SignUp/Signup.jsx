@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import "./Signup.css";
-import Navbar from './Navbar';
+import Navbar from '../Navbar/Navbar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 export default function SignUp() {

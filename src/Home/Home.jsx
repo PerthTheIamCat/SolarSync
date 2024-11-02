@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-import "./Sidebar.css" ;
+import Navbar from "../Navbar/Navbar";
+import Sidebar from "../Sidebar/Sidebar";
 import "./Home.css";
-import Loading from "./Loading";
+import Loading from "../Loading";
 
 function Home() {
   document.title = "Home";

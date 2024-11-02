@@ -3,8 +3,6 @@ import './Sidebar.css';
 import { FaSolarPanel } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { TiWeatherPartlySunny } from "react-icons/ti";
-//import logo from './logo.png'; // สมมติว่าโลโก้อยู่ในไฟล์นี้
-// import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
     
@@ -13,7 +11,7 @@ export default function Sidebar({isTokenValid}) {
     const navigate = useNavigate();
 
     const handleButtonClick = (path, buttonName) => {
-        setActiveButton(buttonName); // อัปเดตปุ่มที่ถูกกด
+        setActiveButton(buttonName);
         navigate(path);
     };
 

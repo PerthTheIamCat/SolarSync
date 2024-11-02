@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Home.jsx";
-import SignIn from "./Signin.jsx";
-import SignUp from "./Signup.jsx";
+import Home from "./Home/Home.jsx";
+import SignIn from "./SignIn/Signin.jsx";
+import SignUp from "./SignUp/Signup.jsx";
 import Profile from "./Setting/Profile.jsx";
 
 export default function App() {

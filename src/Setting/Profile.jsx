@@ -1,5 +1,5 @@
 
-import Navbar from "../Navbar";
+import Navbar from "../Navbar/Navbar";
 import SettingSidebar from "./SettingSidebar";
 
 function Profile() {
