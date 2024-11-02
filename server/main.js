@@ -3,6 +3,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const emailjs = require("emailjs-com");
 require('dotenv').config({ path: '.env.local' });
 const app = express();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -200,6 +201,35 @@ app.put('/user', (req, res) => {
     getUser(mongo_client).catch(console.dir);
     res.json(result);
   });
+});
+
+app.post('/sentopt',async (req, res) => {
+  const token = req.headers['authorization'];
+  let otp = '';
+  const characters = '0123456789';
+  for (let i = 0; i < 6; i++) {
+      otp += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  await mongo_client.connect();
+  jwt.verify(token, SECRET_KEY, async (err, decoded) => {
+    if (err) return res.status(403).send('Invalid token');
+    const user = users.find(u => u._id.equals(new ObjectId(decoded.userId)));
+    await mongo_client.db("SolarSync").collection("OTP").insertOne({_id: user.email, otp: otp });
+  });
+  
+  const sendEmail = () => {
+    emailjs
+      .send("service_btq6qg9", "template_70xeicx", {OTP : otp, reply_to : "thongkum2546@gmail.com"}, "Ff_Au8ZHm82n1G0Y9")
+      .then((result) => {
+        console.log(result.text);
+        alert("Email sent successfully!");
+      })
+      .catch((error) => {
+        console.error(error.text);
+        alert("Failed to send email.");
+      });
+  };
+  
 });
 
 app.get('/', (req, res) => {

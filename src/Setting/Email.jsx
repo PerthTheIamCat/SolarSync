@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import SettingSidebar from "./SettingSidebar";
+
 import "./Email.css";
 
 function Email(user) {
@@ -12,14 +13,8 @@ function Email(user) {
   const [showModal, setShowModal] = useState(false); // สำหรับควบคุมการแสดงผลของ modal
   const [otp, setOtp] = useState(Array(6).fill("")); // เก็บค่า OTP แยกเป็น 6 ช่อง
 
-  const handleSave = () => {
-    if (password1 !== password2) {
-      setError("Passwords do not match!"); // ถ้ารหัสผ่านไม่ตรงกัน แสดงข้อผิดพลาด
-      return;
-    }
-    setError(""); // ถ้ารหัสผ่านตรงกัน ลบข้อผิดพลาด
-    console.log("Saving email and password:", { email, password: password1 });
-    // แสดง modal เพื่อกรอก OTP
+  const handleSentOTP = (e) => {
+    e.preventDefault();
     setShowModal(true);
   };
 
@@ -59,7 +54,6 @@ function Email(user) {
         <div className="email-container">
           <div className="email-items">
             <h2>Email & Password</h2>
-
             <div className="item">
               <label>Email:</label>
               <input
@@ -68,7 +62,6 @@ function Email(user) {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-
             <div className="item">
               <label>Change Password:</label>
               <input
@@ -77,7 +70,6 @@ function Email(user) {
                 onChange={(e) => setPassword1(e.target.value)}
               />
             </div>
-
             <div className="item">
               <label>Recheck Password:</label>
               <input
@@ -86,13 +78,12 @@ function Email(user) {
                 onChange={(e) => setPassword2(e.target.value)}
               />
             </div>
-
-            {error && <p style={{ color: "red" }}>{error}</p>} {/* แสดงข้อผิดพลาดถ้ามี */}
-
-            <button className="save-button" onClick={handleSave}>
+            {error && <p style={{ color: "red" }}>{error}</p>}{" "}
+            {/* แสดงข้อผิดพลาดถ้ามี */}
+            <button className="save-button" onClick={handleSentOTP}>
               Send OTP
-            </button> {/* ปุ่มสำหรับส่ง OTP */}
-
+            </button>{" "}
+            {/* ปุ่มสำหรับส่ง OTP */}
             {/* Modal สำหรับกรอก OTP */}
             {showModal && (
               <div className="modal">
@@ -111,12 +102,18 @@ function Email(user) {
                       />
                     ))}
                   </div>
-                  <button className="Sm1" onClick={handleSubmitOtp}>Submit OTP</button>
-                  <button className="Sm2" onClick={() => { 
-                      setShowModal(false); // ปิด modal 
+                  <button className="Sm1" onClick={handleSubmitOtp}>
+                    Submit OTP
+                  </button>
+                  <button
+                    className="Sm2"
+                    onClick={() => {
+                      setShowModal(false); // ปิด modal
                       setOtp(Array(6).fill("")); // ล้างค่า OTP
-                    }}>Cancel</button>
-
+                    }}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </div>
             )}
