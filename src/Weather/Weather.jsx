@@ -47,7 +47,7 @@ export default function Weather() {
                                         Authorization: `${localStorage.getItem('token')}`
                                     }
                                 });
-                                if (response.data.email) {
+                                if (response.data.email && response.data.isNotiEnabled) {
                                     await emailjs.send('service_btq6qg9', 'template_0l72ebn', {
                                         name: response.data.username,
                                         reply_to: response.data.email,
