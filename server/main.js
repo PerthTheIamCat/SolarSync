@@ -120,7 +120,7 @@ mqttClient2.on('message', (topic, message) => {
     try {
       const Obj = JSON.parse(message.toString());
       temperature = Obj.Temperature || 0;
-      humidity = Obj.DHT22.humidity || 0;
+      humidity = Obj.DHT22.Humidity || 0;
       pressure = Obj.BMP280.Pressure || 0;
       heat_index = Obj.HeatIndex || 0;
       dew_point = Obj.DewPoint || 0;

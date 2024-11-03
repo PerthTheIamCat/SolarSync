@@ -8,16 +8,14 @@
     right: 0px;
     margin-right: 35px;
 }
-
-  
-  .LOGO-Nav {
+.LOGO-Nav {
     width: 75px;
     height: 75px;
     margin-left: 35px;
-    border-radius : 50%; ;
-  }
-  
-  
+    border-radius : 50%;
+    cursor: pointer;
+
+}
 .container {
     display: flex;
     margin: auto;

@@ -4,6 +4,7 @@ import { Chart, registerables } from 'chart.js';
 import Navbar from '../Navbar/Navbar.jsx';
 import Sidebar from '../Sidebar/Sidebar.jsx';
 import './Weather.css';
+import axios from 'axios';
 
 Chart.register(...registerables);
 
@@ -16,33 +17,37 @@ export default function Weather() {
         DewPoint: [],
         RainRate: []
     });
-    const [chartKey, setChartKey] = useState(0);
 
-    // ดึงข้อมูลจาก API เมื่อโหลดหน้า
+    // Maximum data points to display on the chart
+    const maxDataPoints = 20;
+
+    // Fetch data from API every second
     useEffect(() => {
-        fetch('/data/weather')
-            .then(response => response.json())
-            .then(data => {
-                setWeatherData(data);
-                setChartKey(prevKey => prevKey + 1); // อัปเดต key
-            })
-            .catch(error => {
-                console.error('Error fetching weather data:', error);
-                // กรณีที่ดึงข้อมูลไม่สำเร็จให้ตั้งค่าข้อมูลจำลอง
-                const mockData = {
-                    Temperature: [22, 23, 24, 25, 26, 27],
-                    Humidity: [45, 50, 55, 60, 65, 70],
-                    Pressure: [1012, 1013, 1014, 1015, 1016, 1017],
-                    HeatIndex: [25, 26, 27, 28, 29, 30],
-                    DewPoint: [10, 11, 12, 13, 14, 15],
-                    RainRate: [0, 1, 2, 3, 4, 5],
-                };
-                setWeatherData(mockData); // ตั้งค่า mock data
-            });
+        const fetchData = () => {
+            axios.get('http://localhost:3001/data/weather')
+                .then(response => {
+                    const data = response.data;
+                    setWeatherData(prevData => ({
+                        Temperature: [...prevData.Temperature, data.Temperature].slice(-maxDataPoints),
+                        Humidity: [...prevData.Humidity, data.Humidity].slice(-maxDataPoints),
+                        Pressure: [...prevData.Pressure, data.Pressure].slice(-maxDataPoints),
+                        HeatIndex: [...prevData.HeatIndex, data.HeatIndex].slice(-maxDataPoints),
+                        DewPoint: [...prevData.DewPoint, data.DewPoint].slice(-maxDataPoints),
+                        RainRate: [...prevData.RainRate, data.RainRate].slice(-maxDataPoints)
+                    }));
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                });
+        };
+
+        fetchData(); // Fetch data immediately on mount
+        const intervalId = setInterval(fetchData, 1000); // Fetch data every 1 second
+
+        return () => clearInterval(intervalId); // Cleanup interval on unmount
     }, []);
 
-
-    // ตั้งค่าข้อมูลสำหรับกราฟ
+    // Chart configuration
     const chartData = (label, data) => ({
         labels: Array.from({ length: data.length }, (_, i) => i + 1),
         datasets: [
@@ -52,6 +57,7 @@ export default function Weather() {
                 fill: false,
                 backgroundColor: 'rgba(3, 169, 244, 0.6)',
                 borderColor: 'rgba(3, 169, 244, 1)',
+                tension: 0.4 // Adds a smooth curve to the line chart
             }
         ]
     });
