@@ -2,21 +2,26 @@ import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import SettingSidebar from "./SettingSidebar";
 import "./Noti.css";
+import axios from "axios";
 
 function Noti(user) {
   document.title = "Notification";
 
   const [isNotiEnabled, setIsNotiEnabled] = useState(false);
 
-  const handleToggle = () => {
-    const newStatus = !isNotiEnabled;
-    setIsNotiEnabled(newStatus);
-
-    if (newStatus) {
-      alert("เปิดการแจ้งเตือนแล้ว");
-    } else {
-      alert("ปิดการแจ้งเตือนแล้ว");
-    }
+  const handleToggle = async () => {
+    await axios.post("http://localhost:3001/notification/toggle", {
+      isNotiEnabled: !isNotiEnabled,
+    }, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    }).then(() => {
+      setIsNotiEnabled(!isNotiEnabled);
+      alert("Notification setting has been updated");
+    }).catch((error) => {
+      console.error(error);
+    })
   };
 
   return (

@@ -3,7 +3,6 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const emailjs = require("emailjs-com");
 require('dotenv').config({ path: '.env.local' });
 const app = express();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -102,7 +101,7 @@ mqttClient.on('message', (topic, message) => {
       LDR_LEF = Obj.LDR_LEF || 0;
       voltage = Obj.Voltage || 0;
       current = Obj.Current || 0;
-      angle = Obj.angle || 0;
+      angle = Obj.Angle || 0;
       battery_percentage = Obj.battery_percentage || 0;
       battery_voltage = Obj.battery_voltage || 0;
       watt = voltage * current;
@@ -153,7 +152,7 @@ app.post('/register', (req, res) => {
   if (user) {
     res.status(400).send('this email already been used');
   } else {
-    const newUser = { _id: new ObjectId(), email:email, password:password, img:"", username:"", birthday:"" };
+    const newUser = { _id: new ObjectId(), email:email, password:password, img:"", username:"", birthday:"", isNotiEnabled: false };
     console.log("new user: "+email+" register");
     users.push(newUser);
     insertUser(mongo_client, newUser).catch(console.dir);
@@ -203,33 +202,105 @@ app.put('/user', (req, res) => {
   });
 });
 
-app.post('/sendotp', async (req, res) => {
+app.put('/password', (req, res) => {
   const token = req.headers['authorization'];
+  const { password } = req.body;
+  console.log("user try to update password");
+  if (!token) return res.status(403).send('Token is required');
   jwt.verify(token, SECRET_KEY, async (err, decoded) => {
     if (err) return res.status(403).send('Invalid token');
-    const user = users.find(u => u._id.equals(new ObjectId(decoded.userId)));
-    let otp = '';
-    const characters = '0123456789';
-    for (let i = 0; i < 6; i++) {
-        otp += characters.charAt(Math.floor(Math.random() * characters.length));
+    console.log(decoded);
+    console.log("user: "+decoded.userId+" update password");
+    try {
+      await mongo_client.connect();
+      const result = await mongo_client.db("SolarSync").collection("user").updateOne({ _id: new ObjectId(decoded.userId) }, { $set: { password: password } });
+      getUser(mongo_client).catch(console.dir);
+      res.json(result);
+    } catch (error) {
+      console.error('Error updating password:', error);
+      res.status(500).send('Internal Server Error');
     }
-    await mongo_client.connect();
-    await mongo_client.db("SolarSync").collection("OTP").insertOne({_id: user.email, otp: otp });
   });
+});
+
+app.post('/sendotp', async (req, res) => {
+  const token = req.headers['authorization'];
+  if (!token) return res.status(403).send('Token is required');
   
-  // const sendEmail = () => {
-  //   emailjs
-  //     .send("service_btq6qg9", "template_70xeicx", {OTP : otp, reply_to : "thongkum2546@gmail.com"}, "Ff_Au8ZHm82n1G0Y9")
-  //     .then((result) => {
-  //       console.log(result.text);
-  //       alert("Email sent successfully!");
-  //     })
-  //     .catch((error) => {
-  //       console.error(error.text);
-  //       alert("Failed to send email.");
-  //     });
-  // };
+  jwt.verify(token, SECRET_KEY, async (err, decoded) => {
+    if (err) return res.status(403).send('Invalid token');
+    
+    try {
+      const user = users.find(u => u._id.equals(new ObjectId(decoded.userId)));
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+      let otp = '';
+      const characters = '0123456789';
+      for (let i = 0; i < 6; i++) {
+        otp += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      await mongo_client.connect();
+      const otpCollection = mongo_client.db("SolarSync").collection("OTP");
+      const existingOTP = await otpCollection.findOne({ _id: user.email });
+      if (existingOTP) {
+        await otpCollection.updateOne({ _id: user.email }, { $set: { otp: otp } });
+      } else {
+        await otpCollection.insertOne({ _id: user.email, otp: otp });
+      }
+      res.json({ otp: otp , email: user.email});
+    } catch (error) {
+      console.error('Error generating OTP:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+});
+
+app.post('/verifyotp', async (req, res) => {
+  const token = req.headers['authorization'];
+  const { otp } = req.body;
+  if (!token) return res.status(403).send('Token is required');
   
+  jwt.verify(token, SECRET_KEY, async (err, decoded) => {
+    if (err) return res.status(403).send('Invalid token');
+    
+    try {
+      const user = users.find(u => u._id.equals(new ObjectId(decoded.userId)));
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+      await mongo_client.connect();
+      const otpCollection = mongo_client.db("SolarSync").collection("OTP");
+      const existingOTP = await otpCollection.findOne({ _id: user.email });
+      if (existingOTP && existingOTP.otp === otp) {
+        res.json({ status: 'success' });
+      } else {
+        res.status(401).send('Invalid OTP');
+      }
+    } catch (error) {
+      console.error('Error verifying OTP:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+});
+
+app.post("/notification/toggle",async (req, res) => {
+  const isNotiEnabled = req.body.isNotiEnabled;
+  const token = req.headers['authorization'];
+  if (!token) return res.status(403).send('Token is required');
+  jwt.verify(token, SECRET_KEY, async (err, decoded) => {
+    if (err) return res.status(403).send('Invalid token');
+    console.log(decoded);
+    console.log("user: "+decoded.userId+" toggle notification");
+    try {
+      await mongo_client.connect();
+      await mongo_client.db("SolarSync").collection("user").updateOne({ _id: new ObjectId(decoded.userId) }, { $set: { isNotiEnabled: isNotiEnabled } });
+    } catch (error) {
+      console.error('Error toggling notification:', error);
+      res.status(500).send('Internal Server Error');
+    }
+    res.json({ status: 'success' });
+  });
 });
 
 app.get('/', (req, res) => {
