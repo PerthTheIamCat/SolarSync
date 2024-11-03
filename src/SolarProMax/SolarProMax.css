@@ -1,7 +1,11 @@
 .bg {
-    background-color: #F1FDFF;
+    overflow-y: scroll;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     width: 100%;
-    height: 90vh;
+    background-color: #F1FDFF;
 }
 
 .solar {
@@ -21,7 +25,7 @@
 
 #visual-solar {
     width: 100%;
-    height: 100%;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -110,4 +114,20 @@
 
 .red {
     background-color: red;
+}
+
+.charts-solar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 65%;
+    padding-left: 335px;
+    background-color: #F1FDFF;
+}
+
+.chart {
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
