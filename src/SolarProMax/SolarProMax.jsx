@@ -124,9 +124,7 @@ export default function SolarProMax() {
         <div className="solar">
           <h1 id="solar-title">Solar Cell</h1>
           <div id="visual-solar">
-            <div id="square"></div>
-            <div id="pole-vertical"></div>
-            <div id="pole-horizontal"></div>
+          <img src="/image/image.png" alt="solar" />
             <div
               id="status-ldr-right"
               className={data.LDR_RIG ? `green` : `red`}
