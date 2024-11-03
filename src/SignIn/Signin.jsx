@@ -3,11 +3,10 @@ import "./Signin.css";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function SignIn({ onCloseSignIn, onOpenSignUp }) { // Accept props for controlling popups
+export default function SignIn({ onCloseSignIn, onOpenSignUp, setToken }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [isPopupVisible, setIsPopupVisible] = useState(true);
     const navigate = useNavigate();
 
     async function sha256Hash(msg) {
@@ -32,6 +31,8 @@ export default function SignIn({ onCloseSignIn, onOpenSignUp }) { // Accept prop
             });
             console.log(response);
             localStorage.setItem('token', response.data.token);
+            setToken(response.data.token);
+            onCloseSignIn();
             navigate('/');
         } catch (error) {
             console.error(error);
@@ -40,52 +41,59 @@ export default function SignIn({ onCloseSignIn, onOpenSignUp }) { // Accept prop
     };
 
     const handleBackgroundClick = () => {
-        setIsPopupVisible(false); // Close popup on background click
-        onCloseSignIn(); // Call function to close sign-in popup in parent
+        onCloseSignIn();
+    };
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+        setErrorMessage(''); // Clear error message on input change
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        setErrorMessage(''); // Clear error message on input change
     };
 
     return (
-        <div className={`bg-sign-in ${isPopupVisible ? 'visible' : 'hidden'}`} onClick={handleBackgroundClick}>
-            {isPopupVisible && (
-                <div id="container-sign-in" onClick={(e) => e.stopPropagation()}>
-                    <h1>Sign In</h1>
+        <div className="bg-sign-in" onClick={handleBackgroundClick}>
+            <div id="container-sign-in" onClick={(e) => e.stopPropagation()}>
+                <h1>Sign In</h1>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="input-email">
+                        Email:<br />
+                        <input 
+                            id="input-email" 
+                            type="email" 
+                            value={email} 
+                            onChange={handleEmailChange} 
+                        />
+                    </label>
+                    <label htmlFor="input-password">
+                        Password:<br />
+                        <input 
+                            id="input-password" 
+                            type="password" 
+                            value={password} 
+                            onChange={handlePasswordChange} 
+                        />
+                    </label>
+                    <label htmlFor="forgot-password">
+                        <a id="forgot-password" href="/">Forgot password?</a>
+                    </label>
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="input-email">
-                            Email:<br />
-                            <input 
-                                id="input-email" 
-                                type="email" 
-                                value={email} 
-                                onChange={(e) => setEmail(e.target.value)} 
-                            />
-                        </label>
-                        <label htmlFor="input-password">
-                            Password:<br />
-                            <input 
-                                id="input-password" 
-                                type="password" 
-                                value={password} 
-                                onChange={(e) => setPassword(e.target.value)} 
-                            />
-                        </label>
-                        <label htmlFor="forgot-password">
-                            <a id="forgot-password" href="/">Forgot password?</a>
-                        </label>
-                        <button id="SignIn-btn" type="submit">Sign In</button>
-                        <label htmlFor="sign-up">
-                            <span>Don't have an account? 
-                                <a onClick={() => {
-                                    onCloseSignIn(); // Close Sign In popup
-                                    onOpenSignUp(); // Open Sign Up popup
-                                }}>
-                                    Sign Up
-                                </a>
-                            </span>
-                        </label>
-                    </form>
-                </div>
-            )}
+                    <button id="SignIn-btn" type="submit" >Sign In</button>
+                    <label htmlFor="sign-up">
+                        <span>Don't have an account? 
+                            <a onClick={() => {
+                                onCloseSignIn();
+                                onOpenSignUp();
+                            }}>
+                                Sign Up
+                            </a>
+                        </span>
+                    </label>
+                </form>
+            </div>
         </div>
     );
 }
