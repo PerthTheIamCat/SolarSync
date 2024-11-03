@@ -142,15 +142,6 @@ export default function SolarProMax() {
         </div>
         <div className="charts-solar">
           <div className="chart">
-            <h2>Battery Percentage</h2>
-            <Line
-              data={chartData(
-                "battery_percentage",
-                solarData.chart_battery_percentage
-              )}
-            />
-          </div>
-          <div className="chart">
             <h2>Voltage</h2>
             <Line data={chartData("Voltage", solarData.chart_Voltage)} />
           </div>
