@@ -37,6 +37,7 @@ function Profile() {
           });
       }
       updateUser();
+      window.location.reload();
       alert("Profile Updated");
     } catch (error) {
       console.error(error);
