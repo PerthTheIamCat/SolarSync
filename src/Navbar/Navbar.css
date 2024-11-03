@@ -9,6 +9,13 @@
     margin-right: 35px;
 }
 
+.LOGO{
+    border-top:0px 0px 0px 0px;
+    height: 75px; /* ความสูงของโลโก้ */
+    width: 75px; /* ความกว้างของโลโก้ */
+    border-radius: 50%; /* ทำให้โลโก้เป็นวงกลม */
+    
+}
 .container {
     display: flex;
     margin: auto;
