@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import SettingSidebar from "./SettingSidebar";
+import axios from "axios";
+import emailjs from "emailjs-com";
 import "./Email.css";
+
 
 function Email(user) {
   document.title = "E-mail & Password";
@@ -12,16 +15,47 @@ function Email(user) {
   const [showModal, setShowModal] = useState(false); // สำหรับควบคุมการแสดงผลของ modal
   const [otp, setOtp] = useState(Array(6).fill("")); // เก็บค่า OTP แยกเป็น 6 ช่อง
 
-  const handleSave = () => {
-    if (password1 !== password2) {
-      setError("Passwords do not match!"); // ถ้ารหัสผ่านไม่ตรงกัน แสดงข้อผิดพลาด
-      return;
-    }
-    setError(""); // ถ้ารหัสผ่านตรงกัน ลบข้อผิดพลาด
-    console.log("Saving email and password:", { email, password: password1 });
-    // แสดง modal เพื่อกรอก OTP
-    setShowModal(true);
+  const sendEmail = async (otp, email) => {
+    return emailjs
+      .send(
+        "service_btq6qg9",
+        "template_70xeicx",
+        { OTP: otp, reply_to: "thongcum2546@gmail.com" },
+        "Ff_Au8ZHm82n1G0Y9"
+      )
+      .then((result) => {
+        console.log('Email sent:', result.text);
+      })
+      .catch((error) => {
+        console.error('Email sending error:', error);
+      });
   };
+
+  const handleSentOTP = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        "http://localhost:3001/sendotp",
+        {},
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      ).then((res) => {
+        console.log(res);
+        sendEmail(res.data.otp, res.data.email);
+        setShowModal(true);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  async function sha256Hash(msg) {
+    const data = new TextEncoder().encode(msg); // แปลงเป็นไบนารี
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data); // คำนวณแฮช
+    return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join(''); // แปลงเป็นฐาน 16
+  }
 
   const handleChangeOtp = (index, value) => {
     if (value.match(/^[0-9]$/) || value === "") {
@@ -40,16 +74,45 @@ function Email(user) {
     }
   };
 
-  const handleSubmitOtp = () => {
-    const otpString = otp.join("");
-    if (otpString.length === 6) {
-      console.log("OTP submitted:", otpString);
-      setShowModal(false); // ปิด modal เมื่อ OTP ถูกรับ
-      // สามารถทำการบันทึกข้อมูลหรืออื่นๆ ตามต้องการ
-    } else {
-      setError("Please enter a valid 6-digit OTP!");
-    }
+  const handleSubmitOtp = async () => {
+    const userOtp = otp.join("");
+    await axios.post("http://localhost:3001/verifyotp", {
+      otp: userOtp,
+    }, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    }).then(async (res) =>  {
+      console.log(res);
+      const hashedPassword = await sha256Hash(password1);
+      if (res.status === 200) {
+        axios.put("http://localhost:3001/password", {
+          password: hashedPassword,
+        }, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }).then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            window.location.reload();
+          }
+        });
+      }
+    }).catch((error) => {
+      console.error(error);
+      setError("Invalid OTP");
+    })
   };
+  useState(async () => {
+    await axios.get("http://localhost:3001/user", {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    }).then((res) => {
+      setEmail(res.data.email);
+    });
+  }, []);
 
   return (
     <div id="container">
@@ -59,16 +122,14 @@ function Email(user) {
         <div className="email-container">
           <div className="email-items">
             <h2>Email & Password</h2>
-
             <div className="item">
               <label>Email:</label>
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                readOnly
               />
             </div>
-
             <div className="item">
               <label>Change Password:</label>
               <input
@@ -77,7 +138,6 @@ function Email(user) {
                 onChange={(e) => setPassword1(e.target.value)}
               />
             </div>
-
             <div className="item">
               <label>Recheck Password:</label>
               <input
@@ -86,13 +146,12 @@ function Email(user) {
                 onChange={(e) => setPassword2(e.target.value)}
               />
             </div>
-
-            {error && <p style={{ color: "red" }}>{error}</p>} {/* แสดงข้อผิดพลาดถ้ามี */}
-
-            <button className="save-button" onClick={handleSave}>
+            {error && <p style={{ color: "red" }}>{error}</p>}{" "}
+            {/* แสดงข้อผิดพลาดถ้ามี */}
+            <button className="save-button" onClick={handleSentOTP}>
               Send OTP
-            </button> {/* ปุ่มสำหรับส่ง OTP */}
-
+            </button>{" "}
+            {/* ปุ่มสำหรับส่ง OTP */}
             {/* Modal สำหรับกรอก OTP */}
             {showModal && (
               <div className="modal">
@@ -111,12 +170,18 @@ function Email(user) {
                       />
                     ))}
                   </div>
-                  <button className="Sm1" onClick={handleSubmitOtp}>Submit OTP</button>
-                  <button className="Sm2" onClick={() => { 
-                      setShowModal(false); // ปิด modal 
+                  <button className="Sm1" onClick={handleSubmitOtp}>
+                    Submit OTP
+                  </button>
+                  <button
+                    className="Sm2"
+                    onClick={() => {
+                      setShowModal(false); // ปิด modal
                       setOtp(Array(6).fill("")); // ล้างค่า OTP
-                    }}>Cancel</button>
-
+                    }}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </div>
             )}

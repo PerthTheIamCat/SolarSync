@@ -69,6 +69,7 @@ function Home(props) {
 
   return (
     <div id="home-container">
+      <Sidebar isTokenValid={isTokenValid} />
       <Navbar isTokenValid={isTokenValid} onOpenSignUp={onOpenSignUp} handleLogout={handleLogout}/>
       <div className="HOME relative">
         <div className="banner"></div>
@@ -84,9 +85,7 @@ function Home(props) {
         <h1>Home</h1>
         <p>Welcome to the Home page.</p>
       </div>
-
-      <div className="HOME">
-        <Sidebar isTokenValid={isTokenValid} />
+      <div className="HOME ">
         <h1>Welcome to the Dashboard</h1>
       </div>
 

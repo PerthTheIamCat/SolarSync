@@ -99,7 +99,7 @@ function Profile() {
               <input type="email" value={email || ""} readOnly />
             </div>
             <div className="profile-item">
-              <label>image:</label>
+              <label>image URL:</label>
               <input type="text" value={img || ""} onChange={(e) => setImg(e.target.value)}/>
             </div>
             <button className="save-button" onClick={handleSave}>
