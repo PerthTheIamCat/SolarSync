@@ -30,6 +30,11 @@
     box-shadow: 0 0 10px 0 rgba(2, 136, 209, 0.9);
 }
 
+.Timeline{
+    margin-left: 30px;
+    color: #fff;
+}
+
 .banner {
     position: absolute;
     height: 130px;

@@ -7,6 +7,7 @@ import SettingEmail from "./Setting/Email.jsx";
 import Noti from "./Setting/Noti.jsx";
 import Solar from "./SolarProMax/SolarProMax.jsx";
 import Weather from "./Weather/Weather.jsx";
+import Timeline from "./Timeline/Timeline.jsx";
 export default function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="setting/notification" element={<Noti />} />
         <Route path="solar" element={<Solar />} />
         <Route path="weather" element={<Weather />} />
+        <Route path="timeline" element={<Timeline />} />
       </Routes>
     </BrowserRouter>
   );

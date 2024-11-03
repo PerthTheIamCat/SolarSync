@@ -30,6 +30,11 @@ function Navbar({ onOpenSignUp, isTokenValid , handleLogout}) {
       <div className="container">
         <ul>
           <img className="LOGO-Nav" src="/image/Logo1.png" alt="Logo" onClick={() => navigate("/")}/>
+
+          <div className="Timeline">
+            <h2 onClick={()=> navigate('/timeline')}>Timeline</h2>
+          </div>
+
           {isTokenValid ? (
             <div>
               <div id="profile" onClick={openProfile}>
