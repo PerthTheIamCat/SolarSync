@@ -16,11 +16,12 @@
 }
 
 /* โลโก้ */
-.logo img {
-    width: 80px;
-    height: auto;
-    margin-bottom: 20px;
+.LOGO-Side {
+    width: 150px; /* ขนาดปรับให้เหมาะสม */
+    height: 150px; 
+    border-radius: 50%; /* ทำให้เป็นวงกลม */
 }
+
 
 /* เมนู */
 .menu {

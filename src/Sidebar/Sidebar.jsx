@@ -16,7 +16,7 @@ export default function Sidebar({isTokenValid}) {
         {isTokenValid ? (
         <div>
             <div className="sidebar">
-                <h2>LOGO</h2>
+            <img className="LOGO-Side" src="/image/Logo-dark-removebg.png" alt="Logo" onClick={() => navigate("/")}/>
                 <ul className="menu">
                 <button
                     onClick={() => navigate('/')}

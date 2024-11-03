@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 
+
 function Navbar({ onOpenSignUp, isTokenValid , handleLogout}) {
  
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -28,7 +29,7 @@ function Navbar({ onOpenSignUp, isTokenValid , handleLogout}) {
       </div>
       <div className="container">
         <ul>
-          <img className="LOGO" src="/image/Logo.png" alt="Logo" onClick={() => navigate("/")}/>
+          <img className="LOGO-Nav" src="/image/Logo1.png" alt="Logo" onClick={() => navigate("/")}/>
           {isTokenValid ? (
             <div>
               <div id="profile" onClick={openProfile}>
