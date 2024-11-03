@@ -20,7 +20,7 @@ function Email(user) {
       .send(
         "service_btq6qg9",
         "template_70xeicx",
-        { OTP: otp, reply_to: email },
+        { OTP: otp, reply_to: email, email: email },
         "Ff_Au8ZHm82n1G0Y9"
       )
       .then((result) => {
