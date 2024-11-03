@@ -73,14 +73,12 @@ function Timeline(props) {
       <Navbar isTokenValid={isTokenValid} onOpenSignUp={onOpenSignUp} handleLogout={handleLogout}/>
       <div className="HOME relative">
         <div className="banner"></div>
-
-        <h2>Welcome to Solar Sync</h2>
-        <p className="intro-text">
-          ก้าวสู่โลกใหม่แห่งการใช้พลังงานแสงอาทิตย์ ด้วยระบบติดตามแสงอัจฉริยะที่ออกแบบมา
-          เพื่อประสิทธิภาพสูงสุดของคุณ เราพร้อมให้คุณติดตามและควบคุมการทำงานของระบบพลังงานแสงอาทิตย์
-          ได้ง่ายดายและสะดวกขึ้นทุกที่ ทุกเวลา
-        </p>
-
+            <div className="HOME intro-text">
+                <h1>Timeline</h1>
+                <h2>Day1</h2>
+                <img src="path_to_your_dashboard_image.jpg" alt="timeline-day1" className="timeline-image1" />
+                <p>ได้ทำการออกแบบ Model ของตัวแท่นวางและแกนหมุนของ Solar Cell รวมถึงออกแบบ Figma ของหน้าเว็ปไว้ก่อนเพื่อใช้แสดงข้อมูลผ่านเว็ปไซต์</p>
+            </div>
         {!isTokenValid && (
           <button className="sign-in-btn" onClick={() => setIsOpenSignIn(true)}>
             Sign In
@@ -88,12 +86,7 @@ function Timeline(props) {
         )}
       </div>
 
-      <div className="HOME intro-text">
-        <h1>Timeline</h1>
-        <h2>Day1</h2>
-        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day1" className="timeline-image1" />
-        <p>ได้ทำการออกแบบ Model ของตัวแท่นวางและแกนหมุนของ Solar Cell รวมถึงออกแบบ Figma ของหน้าเว็ปไว้ก่อนเพื่อใช้แสดงข้อมูลผ่านเว็ปไซต์</p>
-      </div>
+      
       <div className="HOME intro-text">
         <h2>Day2</h2>
         <img src="path_to_your_dashboard_image.jpg" alt="timeline-day2" className="timeline-image2" />
