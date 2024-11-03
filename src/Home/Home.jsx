@@ -73,6 +73,7 @@ function Home(props) {
       <Navbar isTokenValid={isTokenValid} onOpenSignUp={onOpenSignUp} handleLogout={handleLogout}/>
       <div className="HOME relative">
         <div className="banner"></div>
+        { isTokenValid && (
         <video 
           className="logo-video" 
           autoPlay 
@@ -84,6 +85,7 @@ function Home(props) {
           <source src="/image/Sola_video.mov" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+      )}
         {!isTokenValid && (
           <button className="sign-in-btn" onClick={() => setIsOpenSignIn(true)}>
             Sign In
