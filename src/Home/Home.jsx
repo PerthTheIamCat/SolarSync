@@ -35,13 +35,13 @@ function Home(props) {
             console.log("Token has expired.");
             localStorage.removeItem("token");
             setIsTokenValid(false);
-            navigate("/signin");
+            navigate("/");
           }
         } catch (error) {
           console.error("Invalid token format", error);
           localStorage.removeItem("token");
           setIsTokenValid(false);
-          navigate("/signin");
+          navigate("/");
         }
       } else {
         console.log("No token found, stay on the Home page.");
