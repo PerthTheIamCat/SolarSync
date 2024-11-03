@@ -34,7 +34,6 @@ export default function SignUp(props) {
                 password: hashedPassword
             });
             onCloseSignUp(); // Close the sign-up popup
-            navigate('/signin'); // Navigate to the sign-in page after successful registration
         } catch (error) {
             console.log(error);
             setErrorMessage('Failed to register. Please try again.'); // Set error message for registration failure
@@ -48,8 +47,7 @@ export default function SignUp(props) {
     return (
         <div className={`bg-sign-up ${isVisible ? 'visible' : 'hidden'}`} onClick={handleBackgroundClick}>
             <div id="container-sign-up" onClick={(e) => e.stopPropagation()}>
-                <h1>Sign Up</h1>
-                {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
+                <h1>Sign Up</h1> 
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="input-email">
                         Email:<br />
@@ -63,6 +61,7 @@ export default function SignUp(props) {
                         Confirm Password:<br />
                         <input id="confirm-password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                     </label>
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
                     <button id="SignUp-btn" type="submit">Sign Up</button>
                     <label htmlFor="sign-in">
                         <span>Already have an account? 

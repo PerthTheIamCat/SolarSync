@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
-import Signin from "../SignIn/Signin";
-import SignUp from "../SignUp/Signup";
 
-function Navbar({ onOpenSignUp, isTokenValid }) {
+function Navbar({ onOpenSignUp, isTokenValid , handleLogout}) {
  
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
@@ -20,8 +18,9 @@ function Navbar({ onOpenSignUp, isTokenValid }) {
         <div id="use-zone">
           <h2 onClick={() => navigate("/setting")}>Settings</h2>
           <h2 onClick={() => { 
-            window.localStorage.removeItem("token"); 
-            navigate("/signin"); 
+            handleLogout();
+            navigate("/"); 
+            isProfileOpen && setIsProfileOpen(!isProfileOpen);
           }}>
             Log Out
           </h2>
@@ -29,7 +28,7 @@ function Navbar({ onOpenSignUp, isTokenValid }) {
       </div>
       <div className="container">
         <ul>
-          <h1 className="LOGO" onClick={() => navigate("/")}>LOGO</h1>
+          <img className="LOGO" src="/image/Logo.png" alt="Logo" onClick={() => navigate("/")}/>
           {isTokenValid ? (
             <div>
               <div id="profile" onClick={openProfile}>

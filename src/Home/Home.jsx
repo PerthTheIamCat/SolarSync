@@ -50,15 +50,26 @@ function Home(props) {
     };
 
     checkToken();
-  }, [navigate]);
+  }, []);
 
   if (!isLoaded) {
     return <Loading />;
   }
 
+  const handleLogout = () => {
+    window.localStorage.removeItem("token");
+    setIsTokenValid(false); // อัปเดตสถานะ isTokenValid ทันที
+    navigate("/"); // เปลี่ยนเส้นทางไปยังหน้าที่ต้องการ
+  };
+
+  const setToken = (token) => {
+    localStorage.setItem("token", token);
+    setIsTokenValid(true); // อัปเดต isTokenValid เมื่อเข้าสู่ระบบสำเร็จ
+  };
+
   return (
     <div id="home-container">
-      <Navbar isTokenValid={isTokenValid} onOpenSignUp={onOpenSignUp} />
+      <Navbar isTokenValid={isTokenValid} onOpenSignUp={onOpenSignUp} handleLogout={handleLogout}/>
       <div className="HOME relative">
         <div className="banner"></div>
         <h1>LOGO</h1>
@@ -84,11 +95,15 @@ function Home(props) {
         <div className="overlay">
           <div className="modal">
             <Signin
-              setToken={props.setToken}
-              onCloseSignIn={() => setIsOpenSignIn(false)}
-              onOpenSignUp={() => {
+              setToken={setToken}
+              onCloseSignIn={() => {
+                console.log("Closing Sign In modal");
                 setIsOpenSignIn(false);
-                setIsOpenSignUp(true); // Open Sign Up when needed
+              }}
+              onOpenSignUp={() => {
+                console.log("Opening Sign Up modal");
+                setIsOpenSignIn(false);
+                setIsOpenSignUp(true);
               }}
             />
           </div>
