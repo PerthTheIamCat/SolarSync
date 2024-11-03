@@ -1,6 +1,7 @@
 .bg-sign-in {
-    background-color: #F1FDFF;
-    height: 90vh;
+    background-color: #0000007c;
+    height: 100vh;
+    width: 100vw; /* Changed to cover full width */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,6 +43,12 @@
     margin-top: 10px;
     border-radius: 5px;
     border: none;
+    transition: border-color 0.3s; /* Transition for focus effect */
+}
+
+#container-sign-in input:focus {
+    outline: none; /* Remove default outline */
+    border: 2px solid #039BE5; /* Add border on focus */
 }
 
 #container-sign-in button {
@@ -55,6 +62,7 @@
     color: white;
     font-size: 1.2em;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s; /* Transition effects */
 }
 
 #container-sign-in button:hover {
@@ -65,17 +73,27 @@
     transform: scale(0.95);
 }
 
+#container-sign-in button:disabled {
+    background-color: #ccc; /* Style for disabled state */
+    cursor: not-allowed;
+}
+
 #container-sign-in a {
     color: white;
     margin-top: 20px;
     text-decoration: underline;
 }
 
+.error-message {
+    color: red; /* Style for error messages */
+    margin: 10px 0;
+}
+
 @media (max-width: 600px) {
     #container-sign-in {
         width: 80%;
     }
-    #container-sign-in input{
+    #container-sign-in input {
         width: 200px;
     }
 }
