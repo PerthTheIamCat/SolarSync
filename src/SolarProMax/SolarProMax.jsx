@@ -6,6 +6,7 @@ import Navbar from "../Navbar/Navbar.jsx";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 import DataBar from "./dataBar.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 Chart.register(...registerables);
 
@@ -22,6 +23,7 @@ export default function SolarProMax() {
     chart_LDR_BOT: [],
     chart_angle: [],
   });
+  const navigate = useNavigate();
 
   // Maximum data points to display on the chart
   const maxDataPoints = 20;
@@ -106,13 +108,18 @@ export default function SolarProMax() {
     console.log(data);
   };
 
+  const handleLogout = () => {
+    window.localStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <>
       
       <Sidebar isTokenValid={true} />
       <DataBar onChange={onChange} />
       <div className="bg relative">
-        <Navbar isTokenValid={true} />
+        <Navbar isTokenValid={true} handleLogout={handleLogout}/>
         <div className="banner"></div>
         <div className="solar">
           <h1 id="solar-title">Solar Cell</h1>

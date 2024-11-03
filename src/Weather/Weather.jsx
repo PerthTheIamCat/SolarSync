@@ -6,6 +6,7 @@ import Sidebar from '../Sidebar/Sidebar.jsx';
 import './Weather.css';
 import axios from 'axios';
 import emailjs from 'emailjs-com';
+import { useNavigate } from 'react-router-dom';
 
 Chart.register(...registerables);
 
@@ -18,6 +19,7 @@ export default function Weather() {
         DewPoint: [],
         RainRate: []
     });
+    const navigate = useNavigate();
 
     // Maximum data points to display on the chart
     const maxDataPoints = 20;
@@ -92,12 +94,16 @@ export default function Weather() {
             }
         ]
     });
+    const handleLogout = () => {
+        window.localStorage.removeItem("token");
+        navigate("/"); 
+    };
 
     return (
         <>
             <Sidebar isTokenValid={true} />
             <div className='bg relative'>
-                <Navbar isTokenValid={true} />
+                <Navbar isTokenValid={true} handleLogout={handleLogout}/>
                 <div className="banner"></div>
                 <div className='content'>
                     <h1 id='weather-title'>Weather Dashboard</h1>

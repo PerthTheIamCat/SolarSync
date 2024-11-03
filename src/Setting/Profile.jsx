@@ -3,6 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import SettingSidebar from "./SettingSidebar";
 import "./Profile.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   document.title = "Profile";
@@ -11,6 +12,7 @@ function Profile() {
   const [birthday, setBirthday] = useState("");
   const [email, setEmail] = useState("");
   const [img, setImg] = useState("");
+  const navigate = useNavigate();
 
   const handleSave = () => {
     try {
@@ -69,10 +71,14 @@ function Profile() {
       console.error(error);
     }
   }, []);
+  const handleLogout = () => {
+    window.localStorage.removeItem("token");
+    navigate("/"); 
+  };
 
   return (
     <div id="Profile-container">
-      <Navbar isTokenValid={true} />
+      <Navbar isTokenValid={true} handleLogout={handleLogout} />
       <div className="Profile relative">
         <div className="banner"></div>
         <div className="profile-container">

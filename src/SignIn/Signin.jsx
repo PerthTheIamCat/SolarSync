@@ -33,6 +33,7 @@ export default function SignIn({ onCloseSignIn, onOpenSignUp, setToken }) {
             setToken(response.data.token);
             onCloseSignIn();
             navigate('/');
+            window.location.reload();
         } catch (error) {
             console.error(error);
             setErrorMessage('Invalid email or password. Please try again.');
