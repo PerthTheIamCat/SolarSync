@@ -73,7 +73,14 @@ function Home(props) {
       <Navbar isTokenValid={isTokenValid} onOpenSignUp={onOpenSignUp} handleLogout={handleLogout}/>
       <div className="HOME relative">
         <div className="banner"></div>
-        <h1>LOGO</h1>
+
+        <h2>Welcome to Solar Sync</h2>
+        <p className="intro-text">
+          ก้าวสู่โลกใหม่แห่งการใช้พลังงานแสงอาทิตย์ ด้วยระบบติดตามแสงอัจฉริยะที่ออกแบบมา
+          เพื่อประสิทธิภาพสูงสุดของคุณ เราพร้อมให้คุณติดตามและควบคุมการทำงานของระบบพลังงานแสงอาทิตย์
+          ได้ง่ายดายและสะดวกขึ้นทุกที่ ทุกเวลา
+        </p>
+
         {!isTokenValid && (
           <button className="sign-in-btn" onClick={() => setIsOpenSignIn(true)}>
             Sign In
@@ -82,11 +89,35 @@ function Home(props) {
       </div>
 
       <div className="HOME">
-        <h1>Home</h1>
-        <p>Welcome to the Home page.</p>
+        <h1>Timeline</h1>
+        <h2>Day1</h2>
+        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day1" className="timeline-image1" />
+        <p>ได้ทำการออกแบบ Model ของตัวแท่นวางและแกนหมุนของ Solar Cell รวมถึงออกแบบ Figma ของหน้าเว็ปไว้ก่อนเพื่อใช้แสดงข้อมูลผ่านเว็ปไซต์</p>
       </div>
       <div className="HOME ">
-        <h1>Welcome to the Dashboard</h1>
+        <h2>Day2</h2>
+        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day2" className="timeline-image2" />
+        <p>ในวันนี้ได้ทำการทำแท่นวาง Solar Cell โดยมาประกอบกันของแต่ละส่วน</p>
+      </div>
+      <div className="HOME ">
+        <h2>Day3</h2>
+        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day3" className="timeline-image3" />
+        <p>ในวันนี้ได้ทำการทำแกนหมุนแท่นวาง Solar Cell โดยมาประกอบกันและทำการทาสี</p>
+      </div>
+      <div className="HOME ">
+        <h2>Day4</h2>
+        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day4" className="timeline-image4" />
+        <p>ทำการออกแบบและตรวจสอบ Schematic และ PCB แล้วจึงทำการสั่งซื้ออุปกรณ์ที่ต้องใช้ในการทำ</p>
+      </div>
+      <div className="HOME ">
+        <h2>Day5</h2>
+        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day5" className="timeline-image5" />
+        <p>เมื่อได้รับ PCB ทำการบัดกีกับ Pin Header เพื่อความสะดวกในการเชื่อมสายไฟ</p>
+      </div>
+      <div className="HOME ">
+        <h2>Day6</h2>
+        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day6" className="timeline-image6" />
+        <p>ทำการติดอุปกรณ์เข้ากับ Model รวมถึงเชื่อมสายไฟต่างๆ</p>
       </div>
 
       {/* Modal for Sign In */}
