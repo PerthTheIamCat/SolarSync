@@ -99,6 +99,7 @@ function Email(user) {
           }
         });
       }
+      alert('Password Changed');
     }).catch((error) => {
       console.error(error);
       setError("Invalid OTP");

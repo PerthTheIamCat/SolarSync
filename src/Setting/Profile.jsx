@@ -37,6 +37,7 @@ function Profile() {
           });
       }
       updateUser();
+      alert("Profile Updated");
     } catch (error) {
       console.error(error);
     }
