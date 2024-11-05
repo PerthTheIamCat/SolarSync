@@ -85,7 +85,7 @@ function Home(props) {
               playsInline
               style={{ width: "830px", height: "auto" }}
             >
-              <source src="/image/Sola_video.mov" type="video/mp4" />
+              <source src="/image/Solar_video.mov" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <p className="intro-textSignin">

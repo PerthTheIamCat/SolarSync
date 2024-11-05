@@ -6,7 +6,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import "./Timeline.css";
 import Loading from "../Loading";
 import Signin from "../SignIn/Signin";
-import SignUp from "../SignUp/Signup";  
+import SignUp from "../SignUp/Signup";
 
 function Timeline(props) {
   document.title = "Timeline";
@@ -70,15 +70,70 @@ function Timeline(props) {
   return (
     <div id="home-container">
       <Sidebar isTokenValid={isTokenValid} />
-      <Navbar isTokenValid={isTokenValid} onOpenSignUp={onOpenSignUp} handleLogout={handleLogout}/>
+      <Navbar
+        isTokenValid={isTokenValid}
+        onOpenSignUp={onOpenSignUp}
+        handleLogout={handleLogout}
+      />
       <div className="HOME relative">
         <div className="banner"></div>
-            <div className="HOME intro-text">
-                <h1>Timeline</h1>
-                <h2>Day1</h2>
-                <img src="path_to_your_dashboard_image.jpg" alt="timeline-day1" className="timeline-image1" />
-                <p>ได้ทำการออกแบบ Model ของตัวแท่นวางและแกนหมุนของ Solar Cell รวมถึงออกแบบ Figma ของหน้าเว็ปไว้ก่อนเพื่อใช้แสดงข้อมูลผ่านเว็ปไซต์</p>
-            </div>
+        <div className="HOME intro-text">
+          <h1>Timeline</h1>
+          <h2>Day1</h2>
+          <div className="image_container">
+            <img
+              src="/image/day1/1.png"
+              alt="timeline-day1"
+              className="timeline-image1"
+              height={600}
+              width={600}
+            />
+            <img
+              src="/image/day1/2.png"
+              alt="timeline-day1"
+              className="timeline-image2"
+              height={600}
+              width={600}
+            />
+            <img
+              src="/image/day1/3.png"
+              alt="timeline-day1"
+              className="timeline-image3"
+              height={600}
+              width={600}
+            />
+            <img
+              src="/image/day1/4.png"
+              alt="timeline-day1"
+              className="timeline-image4"
+              height={600}
+              width={600}
+            />
+            <img
+              src="/image/day1/5.png"
+              alt="timeline-day1"
+              className="timeline-image4"
+              height={600}
+              width={600}
+            />
+            <video
+              width="600"
+              height="600"
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{ backgroundColor: "black" }}
+            >
+              <source src="/image/Solar_video.mov" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <p>
+            ได้ทำการออกแบบ Model ของตัวแท่นวางและแกนหมุนของ Solar Cell
+            รวมถึงออกแบบ Figma ของหน้าเว็ปไว้ก่อนเพื่อใช้แสดงข้อมูลผ่านเว็ปไซต์
+          </p>
+        </div>
         {!isTokenValid && (
           <button className="sign-in-btn" onClick={() => setIsOpenSignIn(true)}>
             Sign In
@@ -86,30 +141,184 @@ function Timeline(props) {
         )}
       </div>
 
-      
       <div className="HOME intro-text">
         <h2>Day2</h2>
-        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day2" className="timeline-image2" />
+        <div className="image_container">
+          <img
+            src="/image/day2/1.jpg"
+            alt="timeline-day2"
+            className="timeline-image1"
+            width={600}
+          />
+          <img
+            src="/image/day2/2.jpg"
+            alt="timeline-day2"
+            className="timeline-image2"
+            width={600}
+          />
+          <img
+            src="/image/day2/3.jpg"
+            alt="timeline-day2"
+            className="timeline-image3"
+            width={600}
+          />
+          <img
+            src="/image/day2/4.jpg"
+            alt="timeline-day2"
+            className="timeline-image4"
+            width={600}
+          />
+          <img
+            src="/image/day2/5.jpg"
+            alt="timeline-day2"
+            className="timeline-image5"
+            width={600}
+          />
+          <img
+            src="/image/day2/6.jpg"
+            alt="timeline-day2"
+            className="timeline-image6"
+            width={600}
+          />
+          <video
+            width="600"
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ backgroundColor: "black" }}
+          >
+            <source src="/image/day2/7.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
         <p>ในวันนี้ได้ทำการทำแท่นวาง Solar Cell โดยมาประกอบกันของแต่ละส่วน</p>
       </div>
       <div className="HOME intro-text">
         <h2>Day3</h2>
-        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day3" className="timeline-image3" />
-        <p>ในวันนี้ได้ทำการทำแกนหมุนแท่นวาง Solar Cell โดยมาประกอบกันและทำการทาสี</p>
+        <div className="image_container">
+          <img
+            src="/image/day3/1.jpg"
+            alt="timeline-day3"
+            className="timeline-image1"
+            width={600}
+          />
+          <img
+            src="/image/day3/2.jpg"
+            alt="timeline-day3"
+            className="timeline-image2"
+            width={600}
+          />
+          <img
+            src="/image/day3/3.jpg"
+            alt="timeline-day3"
+            className="timeline-image3"
+            width={600}
+          />
+          <img
+            src="/image/day3/4.jpg"
+            alt="timeline-day3"
+            className="timeline-image4"
+            width={600}
+          />
+          <img
+            src="/image/day3/5.jpg"
+            alt="timeline-day3"
+            className="timeline-image5"
+            width={600}
+          />
+          <img
+            src="/image/day3/6.jpg"
+            alt="timeline-day3"
+            className="timeline-image6"
+            width={600}
+          />
+          <img
+            src="/image/day3/7.jpg"
+            alt="timeline-day3"
+            className="timeline-image7"
+            width={600}
+          />
+          <video
+            width="600"
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ backgroundColor: "black" }}
+          >
+            <source src="/image/day3/8.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <p>
+          ในวันนี้ได้ทำการทำแกนหมุนแท่นวาง Solar Cell โดยมาประกอบกันและทำการทาสี
+        </p>
       </div>
       <div className="HOME intro-text">
         <h2>Day4</h2>
-        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day4" className="timeline-image4" />
-        <p>ทำการออกแบบและตรวจสอบ FlowChart, Schematic และ PCB แล้วจึงทำการสั่งซื้ออุปกรณ์ที่ต้องใช้ในการทำ</p>
+        <div className="image_container">
+          <img
+            src="/image/day4/1.png"
+            alt="timeline-day4"
+            className="timeline-image1"
+            height={700}
+          />
+          <img
+            src="/image/day4/2.png"
+            alt="timeline-day4"
+            className="timeline-image2"
+            height={700}
+          />
+          <img
+            src="/image/day4/3.png"
+            alt="timeline-day4"
+            className="timeline-image3"
+            height={700}
+          />
+        </div>
+        <p>
+          ทำการออกแบบและตรวจสอบ FlowChart, Schematic และ PCB
+          แล้วจึงทำการสั่งซื้ออุปกรณ์ที่ต้องใช้ในการทำ
+        </p>
       </div>
       <div className="HOME intro-text">
         <h2>Day5</h2>
-        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day5" className="timeline-image5" />
-        <p>เมื่อได้รับ PCB ทำการบัดกีกับ Pin Header เพื่อความสะดวกในการเชื่อมสายไฟ</p>
+        <div className="image_container">
+          <img
+            src="/image/day5/2.jpg"
+            alt="timeline-day4"
+            className="timeline-image1"
+            height={700}
+          />
+          <img
+            src="/image/day5/3.jpg"
+            alt="timeline-day4"
+            className="timeline-image2"
+            height={700}
+          />
+        </div>
+        <p>
+          เมื่อได้รับ PCB ทำการบัดกีกับ Pin Header
+          เพื่อความสะดวกในการเชื่อมสายไฟ
+        </p>
       </div>
       <div className="HOME intro-text">
         <h2>Day6</h2>
-        <img src="path_to_your_dashboard_image.jpg" alt="timeline-day6" className="timeline-image6" />
+        <div className="image_container">
+          <img
+            src="/image/day6/2.jpg"
+            alt="timeline-day6"
+            className="timeline-image1"
+            height={700}
+          />
+          <img
+            src="/image/day6/1.png"
+            alt="timeline-day6"
+            className="timeline-image2"
+            height={700}
+          />
+        </div>
         <p>ทำการติดอุปกรณ์เข้ากับ Model รวมถึงเชื่อมสายไฟต่างๆ</p>
       </div>
 
@@ -137,12 +346,12 @@ function Timeline(props) {
       {isOpenSignUp && (
         <div className="overlay">
           <div className="modal">
-            <SignUp 
-              onCloseSignUp={() => setIsOpenSignUp(false)} 
+            <SignUp
+              onCloseSignUp={() => setIsOpenSignUp(false)}
               onOpenSignIn={() => {
                 setIsOpenSignUp(false);
                 setIsOpenSignIn(true); // Open Sign In when needed
-              }} 
+              }}
             />
           </div>
         </div>
