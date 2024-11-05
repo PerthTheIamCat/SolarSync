@@ -68,11 +68,7 @@ function Noti(user) {
             </div>
         </div>
       </div>
-      <div className="Noti">
-        <SettingSidebar  />             
-            <h1>Welcome to the Dashboard</h1>
-      </div>
-
+      <SettingSidebar  /> 
     </div>
   );
 }
