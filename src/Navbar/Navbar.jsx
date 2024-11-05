@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 function Navbar({ onOpenSignUp, isTokenValid , handleLogout}) {
- 
+  const [img, setImg] = useState("");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
   
@@ -13,6 +14,28 @@ function Navbar({ onOpenSignUp, isTokenValid , handleLogout}) {
     setIsProfileOpen(!isProfileOpen);
   };
 
+  useEffect(() => {
+    try {
+      const getUser = async () => {
+        await axios
+          .get("http://localhost:3001/user", {
+            headers: {
+              Authorization: `${localStorage.getItem("token")}`,
+            },
+          })
+          .then((response) => {
+            console.log(response.data.img);
+            setImg(response.data.img);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+      getUser();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
   return (
     <>
       <div id="side-bar" className={isProfileOpen ? "open" : ""}>
@@ -38,7 +61,7 @@ function Navbar({ onOpenSignUp, isTokenValid , handleLogout}) {
           {isTokenValid ? (
             <div>
               <div id="profile" onClick={openProfile}>
-                <img src="https://popcat.click/twitter-card.jpg" alt="profile" />
+                <img src={img ? img : "/image/blank-profile-picture-973460_1280.webp"} alt="profile" />
               </div>
             </div>
           ) : window.location.pathname === "/signup" ? (

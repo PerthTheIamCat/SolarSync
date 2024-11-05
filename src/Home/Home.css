@@ -69,6 +69,17 @@
     margin-left: 260px;
 }
 
+.logo-video {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px; /* มุมวิดีโอจะโค้งมน */
+    object-fit: cover; /* ทำให้วิดีโอครอบคลุมพื้นที่ที่มีอยู่ */
+    margin-top: 115px;
+    margin-left: 260px;
+    display: block; /* ทำให้วิดีโอเป็นบล็อกเพื่อการจัดกึ่งกลาง */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* เพิ่มเงาเพื่อความลึก */
+}
+
 .sign-in-btn {
     margin-top: 20px;
     padding: 10px 20px;

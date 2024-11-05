@@ -5,6 +5,8 @@ import Navbar from '../Navbar/Navbar.jsx';
 import Sidebar from '../Sidebar/Sidebar.jsx';
 import './Weather.css';
 import axios from 'axios';
+import emailjs from 'emailjs-com';
+import { useNavigate } from 'react-router-dom';
 
 Chart.register(...registerables);
 
@@ -17,13 +19,14 @@ export default function Weather() {
         DewPoint: [],
         RainRate: []
     });
+    const navigate = useNavigate();
 
     // Maximum data points to display on the chart
     const maxDataPoints = 20;
 
     // Fetch data from API every second
     useEffect(() => {
-        const fetchData = () => {
+        const fetchData = async () => {
             axios.get('http://localhost:3001/data/weather')
                 .then(response => {
                     const data = response.data;
@@ -35,6 +38,36 @@ export default function Weather() {
                         DewPoint: [...prevData.DewPoint, data.DewPoint].slice(-maxDataPoints),
                         RainRate: [...prevData.RainRate, data.RainRate].slice(-maxDataPoints)
                     }));
+                    if (weatherData.RainRate >= 60) {
+                        const lastSentTime = localStorage.getItem('lastSentTime');
+                        const currentTime = new Date().getTime();
+                        
+                        if (!lastSentTime || currentTime - lastSentTime > 3600000) { // 3600000 ms = 1 hour
+                            const sendEmail = async () => {
+                                const response = await axios.get('http://localhost:3001/user', {
+                                    headers: {
+                                        Authorization: `${localStorage.getItem('token')}`
+                                    }
+                                });
+                                if (response.data.email && response.data.isNotiEnabled) {
+                                    await emailjs.send('service_btq6qg9', 'template_0l72ebn', {
+                                        name: response.data.username,
+                                        reply_to: response.data.email,
+                                        RainRate: weatherData.RainRate,
+                                        email : response.data.email
+                                    }, 'Ff_Au8ZHm82n1G0Y9')
+                                    .then((result) => {
+                                        console.log('Email sent:', result.text);
+                                        localStorage.setItem('lastSentTime', currentTime);
+                                    })
+                                    .catch((error) => {
+                                        console.error('Email sending error:', error);
+                                    });
+                                }
+                            };
+                            sendEmail();
+                        }
+                    }
                 })
                 .catch(error => {
                     console.error('Error fetching weather data:', error);
@@ -61,12 +94,16 @@ export default function Weather() {
             }
         ]
     });
+    const handleLogout = () => {
+        window.localStorage.removeItem("token");
+        navigate("/"); 
+    };
 
     return (
         <>
             <Sidebar isTokenValid={true} />
             <div className='bg relative'>
-                <Navbar isTokenValid={true} />
+                <Navbar isTokenValid={true} handleLogout={handleLogout}/>
                 <div className="banner"></div>
                 <div className='content'>
                     <h1 id='weather-title'>Weather Dashboard</h1>

@@ -73,7 +73,6 @@ function Home(props) {
       <Sidebar isTokenValid={isTokenValid} />
       <div className="HOME relative">
         <div className="banner"></div>
-
         { isTokenValid && (
         <div className="welcome-HomeSignin">
           <div className="welcome-HomePage1">
@@ -109,7 +108,6 @@ function Home(props) {
               </p>
             </div>
         )}
-
         {!isTokenValid && (
           <button className="sign-in-btn" onClick={() => setIsOpenSignIn(true)}>
             Sign In

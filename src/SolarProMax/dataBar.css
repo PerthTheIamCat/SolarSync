@@ -8,6 +8,7 @@
     padding-top: 20px;
     top: 140px ;
     box-shadow: 0 0 10px 0 #01579b ;
+    z-index: 1;
 }
 
 #title {

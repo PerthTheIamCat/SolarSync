@@ -15,8 +15,7 @@ export default function SignUp(props) {
     async function sha256Hash(msg) {
         const data = new TextEncoder().encode(msg); 
         const hashBuffer = await crypto.subtle.digest('SHA-256', data); 
-        return Array.from(new Uint8Array(hashBuffer))
-                     .map(b => b.toString(16).padStart(2, '0')).join('');
+        return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
     const handleSubmit = async (e) => {
@@ -32,6 +31,14 @@ export default function SignUp(props) {
             await axios.post('http://localhost:3001/register', {
                 email: email,
                 password: hashedPassword
+            });
+            await axios.post('http://localhost:3001/login', {
+                email: email,
+                password: hashedPassword
+            }).then((response) => {
+                localStorage.setItem('token', response.data.token);
+                navigate('/');
+                window.location.reload();
             });
             onCloseSignUp(); // Close the sign-up popup
         } catch (error) {

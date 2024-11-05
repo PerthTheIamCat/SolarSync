@@ -4,6 +4,7 @@ import SettingSidebar from "./SettingSidebar";
 import axios from "axios";
 import emailjs from "emailjs-com";
 import "./Email.css";
+import { useNavigate } from "react-router-dom";
 
 
 function Email(user) {
@@ -14,13 +15,19 @@ function Email(user) {
   const [error, setError] = useState(""); // เก็บข้อผิดพลาด
   const [showModal, setShowModal] = useState(false); // สำหรับควบคุมการแสดงผลของ modal
   const [otp, setOtp] = useState(Array(6).fill("")); // เก็บค่า OTP แยกเป็น 6 ช่อง
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("token");
+    navigate("/");
+  };
 
   const sendEmail = async (otp, email) => {
     return emailjs
       .send(
         "service_btq6qg9",
         "template_70xeicx",
-        { OTP: otp, reply_to: "thongcum2546@gmail.com" },
+        { OTP: otp, reply_to: email, email: email },
         "Ff_Au8ZHm82n1G0Y9"
       )
       .then((result) => {
@@ -99,6 +106,7 @@ function Email(user) {
           }
         });
       }
+      alert('Password Changed');
     }).catch((error) => {
       console.error(error);
       setError("Invalid OTP");
@@ -114,9 +122,10 @@ function Email(user) {
     });
   }, []);
 
+    
   return (
     <div id="container">
-      <Navbar isTokenValid={true} />
+      <Navbar isTokenValid={true} handleLogout={handleLogout}/>
       <div className="Email relative">
         <div className="banner"></div>
         <div className="email-container">

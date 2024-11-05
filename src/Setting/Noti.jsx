@@ -3,11 +3,13 @@ import Navbar from "../Navbar/Navbar";
 import SettingSidebar from "./SettingSidebar";
 import "./Noti.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Noti(user) {
   document.title = "Notification";
 
   const [isNotiEnabled, setIsNotiEnabled] = useState(false);
+  const navigate = useNavigate();
 
   const handleToggle = async () => {
     await axios.post("http://localhost:3001/notification/toggle", {
@@ -24,9 +26,14 @@ function Noti(user) {
     })
   };
 
+  const handleLogout = () => {
+    window.localStorage.removeItem("token");
+    navigate("/"); // เปลี่ยนเส้นทางไปยังหน้าที่ต้องการ
+  };
+
   return (
     <div id="Noti-container">
-      <Navbar isTokenValid={true}  />
+      <Navbar isTokenValid={true} handleLogout={handleLogout} />
 
       <div className="Noti relative">
         <div className="banner"></div>
