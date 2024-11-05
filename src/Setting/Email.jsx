@@ -40,7 +40,12 @@ function Email(user) {
 
   const handleSentOTP = async (e) => {
     e.preventDefault();
+    if (password1 !== password2) {
+      setError("Password does not match");
+      return;
+    }
     try {
+      setError("");
       await axios.post(
         "http://localhost:3001/sendotp",
         {},

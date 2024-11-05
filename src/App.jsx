@@ -8,6 +8,7 @@ import Noti from "./Setting/Noti.jsx";
 import Solar from "./SolarProMax/SolarProMax.jsx";
 import Weather from "./Weather/Weather.jsx";
 import Timeline from "./Timeline/Timeline.jsx";
+import Loading from "./Loading.jsx";
 export default function App() {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="solar" element={<Solar />} />
         <Route path="weather" element={<Weather />} />
         <Route path="timeline" element={<Timeline />} />
+        <Route path="loading" element={<Loading />} />
       </Routes>
     </BrowserRouter>
   );
