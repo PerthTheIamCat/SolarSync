@@ -26,6 +26,7 @@
     text-align: center; /* จัดข้อความให้อยู่กลาง */
 }
 .welcome-Home p {
+    font-size: 30px;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -39,10 +40,15 @@
 
 
 .intro-textSignin{
+    width: 1500px;
+    text-align: center;
     margin-left: 300px;
+    font-size: 25px;
+    place-self: center;
 }
 .intro-text_signin{
     margin-left: 250px;
+    text-align: center;
 }
 
 .About_Us h1{
@@ -74,8 +80,9 @@
     height: 100%;
     border-radius: 10px; /* มุมวิดีโอจะโค้งมน */
     object-fit: cover; /* ทำให้วิดีโอครอบคลุมพื้นที่ที่มีอยู่ */
-    margin-top: 115px;
-    margin-left: 260px;
+    margin-top: 50px;
+    place-self: center;
+    margin-left: 250px;
     display: block; /* ทำให้วิดีโอเป็นบล็อกเพื่อการจัดกึ่งกลาง */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* เพิ่มเงาเพื่อความลึก */
 }

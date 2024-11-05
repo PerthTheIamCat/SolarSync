@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import SettingSidebar from "./SettingSidebar";
 import "./Noti.css";
@@ -30,6 +30,18 @@ function Noti(user) {
     window.localStorage.removeItem("token");
     navigate("/"); // เปลี่ยนเส้นทางไปยังหน้าที่ต้องการ
   };
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/user", {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    }).then((response) => {
+      setIsNotiEnabled(response.data.isNotiEnabled);
+    }).catch((error) => {
+      console.error(error);
+    });
+  } ,[]);
 
   return (
     <div id="Noti-container">

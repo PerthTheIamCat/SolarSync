@@ -182,7 +182,7 @@ app.get('/user', (req, res) => {
     console.log("user: "+decoded.userId+" get data");
     const user = users.find(u => u._id.equals(new ObjectId(decoded.userId)));
     console.log(user);
-    res.json({ email: user.email, username: user.username, birthday: user.birthday, img: user.img});
+    res.json({ email: user.email, username: user.username, birthday: user.birthday, img: user.img, isNotiEnabled: user.isNotiEnabled });
   });
 });
 
@@ -295,6 +295,7 @@ app.post("/notification/toggle",async (req, res) => {
     try {
       await mongo_client.connect();
       await mongo_client.db("SolarSync").collection("user").updateOne({ _id: new ObjectId(decoded.userId) }, { $set: { isNotiEnabled: isNotiEnabled } });
+      getUser(mongo_client).catch(console.dir);
     } catch (error) {
       console.error('Error toggling notification:', error);
       res.status(500).send('Internal Server Error');

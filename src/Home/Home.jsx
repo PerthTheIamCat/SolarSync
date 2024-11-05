@@ -76,7 +76,7 @@ function Home(props) {
         { isTokenValid && (
         <div className="welcome-HomeSignin">
           <div className="welcome-HomePage1">
-            <h1 className="intro-textSignin">Welcome to Solar Sync</h1>
+            <h1 className="intro-text_signin">Welcome to Solar Sync</h1>
             <video 
               className="logo-video" 
               autoPlay 
@@ -99,7 +99,7 @@ function Home(props) {
       )}
 
         { !isTokenValid && (
-          <div className="welcome-Home">
+          <div className="welcome-Home"> 
               <h1 className="intro-text">Welcome to Solar Sync</h1>
               <p className="intro-text">
               ก้าวสู่โลกใหม่แห่งการใช้พลังงานแสงอาทิตย์ ด้วยระบบติดตามแสงอัจฉริยะที่ออกแบบมา
