@@ -69,17 +69,46 @@ function Home(props) {
 
   return (
     <div id="home-container">
-      <Sidebar isTokenValid={isTokenValid} />
       <Navbar isTokenValid={isTokenValid} onOpenSignUp={onOpenSignUp} handleLogout={handleLogout}/>
+      <Sidebar isTokenValid={isTokenValid} />
       <div className="HOME relative">
         <div className="banner"></div>
 
-        <h1 className="intro-text">Welcome to Solar Sync</h1>
-        <p className="intro-text">
-          ก้าวสู่โลกใหม่แห่งการใช้พลังงานแสงอาทิตย์ ด้วยระบบติดตามแสงอัจฉริยะที่ออกแบบมา
-          เพื่อประสิทธิภาพสูงสุดของคุณ เราพร้อมให้คุณติดตามและควบคุมการทำงานของระบบพลังงานแสงอาทิตย์
-          ได้ง่ายดายและสะดวกขึ้นทุกที่ ทุกเวลา
-        </p>
+        { isTokenValid && (
+        <div className="welcome-HomeSignin">
+          <div className="welcome-HomePage1">
+            <h1 className="intro-textSignin">Welcome to Solar Sync</h1>
+            <video 
+              className="logo-video" 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              style={{ width: "830px", height: "auto" }}
+            >
+              <source src="/image/Sola_video.mov" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <p className="intro-textSignin">
+            ก้าวสู่โลกใหม่แห่งการใช้พลังงานแสงอาทิตย์ ด้วยระบบติดตามแสงอัจฉริยะที่ออกแบบมา
+            เพื่อประสิทธิภาพสูงสุดของคุณ เราพร้อมให้คุณติดตามและควบคุมการทำงานของระบบพลังงานแสงอาทิตย์
+            ได้ง่ายดายและสะดวกขึ้นทุกที่ ทุกเวลา
+            </p>
+          </div>
+        </div>
+
+      )}
+
+        { !isTokenValid && (
+          <div className="welcome-Home">
+              <h1 className="intro-text">Welcome to Solar Sync</h1>
+              <p className="intro-text">
+              ก้าวสู่โลกใหม่แห่งการใช้พลังงานแสงอาทิตย์ ด้วยระบบติดตามแสงอัจฉริยะที่ออกแบบมา
+              เพื่อประสิทธิภาพสูงสุดของคุณ เราพร้อมให้คุณติดตามและควบคุมการทำงานของระบบพลังงานแสงอาทิตย์
+              ได้ง่ายดายและสะดวกขึ้นทุกที่ ทุกเวลา
+              </p>
+            </div>
+        )}
 
         {!isTokenValid && (
           <button className="sign-in-btn" onClick={() => setIsOpenSignIn(true)}>
@@ -88,13 +117,30 @@ function Home(props) {
         )}
       </div>
 
-      <div className="HOME">
-        <h1 className="intro-text">Member</h1>
-        <h2 className="intro-text">6530300902 ปวริศ สิงห์ทอง</h2>
-        <h2 className="intro-text">6530300970 ภาวิต ทองคำ</h2>
-        <h2 className="intro-text">6530300988 ภูริภัทร นกคุ้มทอง</h2>
-      </div>
+      {!isTokenValid && (
+          <div className="About_Us">
+            <h1 className="intro-text">Member</h1>
+            <div className="member-list">
+              <h2 className="intro-text">6530300902 ปวริศ สิงห์ทอง</h2>
+              <h2 className="intro-text">6530300970 ภาวิต ทองคำ</h2>
+              <h2 className="intro-text">6530300988 ภูริภัทร นกคุ้มทอง</h2>
+            </div>
+          </div>
+        )}
+
+
+      { isTokenValid && (
+        <div className="About_Us_signin">
+          <h1 className="intro-text_signin">Member</h1>
+          <h2 className="intro-text_signin">6530300902 ปวริศ สิงห์ทอง</h2>
+          <h2 className="intro-text_signin">6530300970 ภาวิต ทองคำ</h2>
+          <h2 className="intro-text_signin">6530300988 ภูริภัทร นกคุ้มทอง</h2>
+
+        </div>
+      )}
+
       
+
 
       {/* Modal for Sign In */}
       {isOpenSignIn && (

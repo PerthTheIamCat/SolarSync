@@ -1,4 +1,4 @@
-.HOME {
+.About_Us{
     display: flex;
     flex-direction: column;
     scroll-snap-align: center;
@@ -7,11 +7,57 @@
     height: 100vh; /* ความสูงเต็มจอ */
     background-color: #F1FDFF;
 }
-
-.intro-text{
-    margin-left: 300px;
+.About_Us_signin {
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* ความสูงเต็มจอ */
+    background-color: #F1FDFF;
+}
+.welcome-Home h1 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-left: 0px;
+    height: 20vh; /* ความสูงเต็มจอ */
+    background-color: #F1FDFF; /* สีพื้นหลังที่ต้องการ */
+    text-align: center; /* จัดข้อความให้อยู่กลาง */
+}
+.welcome-Home p {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    height: 10vh; /* ความสูงเต็มจอ */
+    background-color: #F1FDFF; /* สีพื้นหลังที่ต้องการ */
+    text-align: center; /* จัดข้อความให้อยู่กลาง */
 }
 
+
+.intro-textSignin{
+    margin-left: 300px;
+}
+.intro-text_signin{
+    margin-left: 250px;
+}
+
+.About_Us h1{
+    margin-top: 20px;
+    margin-left: 0px;
+    height: 20vh; /* ความสูงเต็มจอ */
+    background-color: #F1FDFF; /* สีพื้นหลังที่ต้องการ */
+    text-align: center; /* จัดข้อความให้อยู่กลาง */
+}
+
+.member-list{
+    margin-right: 250px;
+    height: 20vh; /* ความสูงเต็มจอ */
+    background-color: #F1FDFF; /* สีพื้นหลังที่ต้องการ */
+}
 .relative {
     position: relative;
 }
