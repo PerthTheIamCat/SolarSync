@@ -30,6 +30,27 @@
     box-shadow: 0 0 10px 0 rgba(2, 136, 209, 0.9);
 }
 
+.Timeline {
+    margin-left: 30px;
+    color: #fff; /* สีข้อความ */
+    cursor: pointer; /* แสดงว่าเป็นลิงก์ */
+    padding: 15px 15px; /* เพิ่ม padding ให้กับ div */
+    border-radius: 5px; /* มุมโค้ง */
+    transition: background-color 0.3s, transform 0.2s; /* เพิ่มเอฟเฟกต์การเปลี่ยนสี */
+}
+
+.Timeline h2 {
+    margin: 0; /* ลบ margin เริ่มต้นของ h2 */
+    font-size: 1.5rem; /* ขนาดฟอนต์ */
+}
+
+/* เพิ่มเอฟเฟกต์เมื่อโฮเวอร์ */
+.Timeline:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* สีพื้นหลังเมื่อโฮเวอร์ */
+    transform: scale(1.05); /* ขยายเล็กน้อยเมื่อโฮเวอร์ */
+}
+
+
 .banner {
     position: absolute;
     height: 130px;

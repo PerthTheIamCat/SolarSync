@@ -1,0 +1,81 @@
+.HOME {
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* ความสูงเต็มจอ */
+    background-color: #F1FDFF;
+}
+
+.intro-text{
+    margin-left: 300px;
+}
+
+.relative {
+    position: relative;
+}
+
+.LOGO-Home{
+    width:700px; /* ขนาดปรับให้เหมาะสม */
+    height: 600px; 
+    margin-top: 150px;
+    margin-left: 260px;
+}
+
+.sign-in-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #039BE5;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s; /* เพิ่มการเปลี่ยนแปลง */
+}
+
+.sign-in-btn:hover {
+    background-color: #0288D1; /* สีเมื่อเมาส์อยู่บนปุ่ม */
+}
+
+.sign-in-btn:active {
+    transform: scale(0.95); /* ลดขนาดเมื่อคลิก */
+}
+
+h1 {
+    font-size: 100px;
+    margin-bottom: 20px;
+    color: #01579B;
+}
+
+#home-container {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    height: 100vh;
+    background-color: #F1FDFF;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 60px; /* ปรับขนาด h1 สำหรับอุปกรณ์ที่เล็กกว่า */
+    }
+
+    .sign-in-btn {
+        padding: 10px 15px; /* ปรับขนาด padding สำหรับปุ่ม */
+        font-size: 16px; /* ปรับขนาดฟอนต์ */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 40px; /* ปรับขนาด h1 สำหรับมือถือ */
+    }
+
+    .sign-in-btn {
+        padding: 8px 12px; /* ปรับขนาด padding สำหรับปุ่ม */
+        font-size: 14px; /* ปรับขนาดฟอนต์ */
+    }
+}
