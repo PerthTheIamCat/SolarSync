@@ -104,7 +104,7 @@ export default function Weather() {
     return (
         <>
             <Sidebar isTokenValid={true} />
-            <div className='bg relative'>
+            <div className='bg'>
                 <Navbar isTokenValid={true} handleLogout={handleLogout}/>
                 <div className="banner"></div>
                 <div className='content'>

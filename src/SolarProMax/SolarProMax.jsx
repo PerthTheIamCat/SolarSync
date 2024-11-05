@@ -114,14 +114,13 @@ export default function SolarProMax() {
   };
 
   return (
-    <>
-      
+    <div id="solar_container">
       <Sidebar isTokenValid={true} />
       <DataBar onChange={onChange} />
-      <div className="bg relative">
-        <Navbar isTokenValid={true} handleLogout={handleLogout}/>
+      <div className="bg">
         <div className="banner"></div>
-        <div className="solar">
+        <Navbar isTokenValid={true} handleLogout={handleLogout}/>
+        <div className="solar relative">
           <h1 id="solar-title">Solar Cell</h1>
           <div id="visual-solar">
           <img src="/image/image.png" alt="solar" />
@@ -180,6 +179,6 @@ export default function SolarProMax() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
