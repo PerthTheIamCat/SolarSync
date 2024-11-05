@@ -77,9 +77,6 @@ export default function SignIn({ onCloseSignIn, onOpenSignUp, setToken }) {
                             onChange={handlePasswordChange} 
                         />
                     </label>
-                    <label htmlFor="forgot-password">
-                        <a id="forgot-password" href="/">Forgot password?</a>
-                    </label>
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
                     <button id="SignIn-btn" type="submit" >Sign In</button>
                     <label htmlFor="sign-up">
