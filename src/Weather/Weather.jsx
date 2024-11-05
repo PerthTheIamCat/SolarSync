@@ -135,7 +135,7 @@ export default function Weather() {
                             <Line data={chartData("Rain Rate", weatherData.RainRate)} />
                         </div>
                     </div>
-                    <iframe style={{marginLeft: 350}}  title="Embedded Content" src="http://20.205.137.214:1880/ui/#!/0?socketid=UOVM57nehtkFeTNNAAA1" width={1550} height={1500}></iframe>
+                    <iframe style={{marginLeft: 325}}  title="Embedded Content" src="http://20.205.137.214:1880/ui/#!/0?socketid=UOVM57nehtkFeTNNAAA1" width={1550} height={2000}></iframe>
                 </div>    
             </div>
         </>
