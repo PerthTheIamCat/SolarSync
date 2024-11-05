@@ -38,22 +38,24 @@ export default function Weather() {
                         DewPoint: [...prevData.DewPoint, data.DewPoint].slice(-maxDataPoints),
                         RainRate: [...prevData.RainRate, data.RainRate].slice(-maxDataPoints)
                     }));
-                    if (weatherData.RainRate >= 60) {
+                    if (data.RainRate >= 60) {
                         const lastSentTime = localStorage.getItem('lastSentTime');
                         const currentTime = new Date().getTime();
                         
                         if (!lastSentTime || currentTime - lastSentTime > 3600000) { // 3600000 ms = 1 hour
+                            console.log('Sending email...');
                             const sendEmail = async () => {
                                 const response = await axios.get('http://localhost:3001/user', {
                                     headers: {
                                         Authorization: `${localStorage.getItem('token')}`
                                     }
                                 });
-                                if (response.data.email && response.data.isNotiEnabled) {
+                                console.log('User data:', response.data);
+                                if (response.data.isNotiEnabled) {
                                     await emailjs.send('service_btq6qg9', 'template_0l72ebn', {
                                         name: response.data.username,
                                         reply_to: response.data.email,
-                                        RainRate: weatherData.RainRate,
+                                        RainRate: data.RainRate,
                                         email : response.data.email
                                     }, 'Ff_Au8ZHm82n1G0Y9')
                                     .then((result) => {
@@ -133,6 +135,7 @@ export default function Weather() {
                             <Line data={chartData("Rain Rate", weatherData.RainRate)} />
                         </div>
                     </div>
+                    <iframe style={{marginLeft: 350}}  title="Embedded Content" src="http://20.205.137.214:1880/ui/#!/0?socketid=UOVM57nehtkFeTNNAAA1" width={1550} height={1500}></iframe>
                 </div>    
             </div>
         </>
